@@ -78,7 +78,7 @@ void Div_Append(Div_Dynamic_Array *D, Div e) {
 
 void Div_print(Div_Dynamic_Array *d) {
     int i;
-    printf("The answer:\nC = (");
+    printf("The answer C = (");
     for (i = 0; i < d->n; i++) {
         if (!strcmp((d->A + i)->state, "NaN")) {
             printf("%s ", "NaN");
@@ -135,6 +135,16 @@ void Div_onArray(Dynamic_Array *a, Dynamic_Array *b, Div_Dynamic_Array *ans) {
             }
         }
     }
+}
+
+void print(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
+    printf(/* "argument %d is \n*/"(");
+    int i;
+    for (i = 0; i < d->n - 1; i++) {
+        printf("%2.2f, ", *(d->A + i));
+    }
+    printf("%2.2f", *(d->A + i));
+    printf(")\n\n");
 }
 
 void Resize(Dynamic_Array *D) {
@@ -226,24 +236,38 @@ void find(Div_Dynamic_Array *a) {
     Dynamic_Array *c = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     Dynamic_Array *d = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     c->A = (double *)calloc(a->n, sizeof(double));
+    if (c == NULL || d == NULL || c->A == NULL) {
+        printf("Can't get memory!\n");
+        return;
+    }
     c->capacity = a->n;
     c->n = 0;
 
     int i = 0;
     for (i = 0; i < a->n; i++) {
-        if (!strcmp((a->A + i)->state, "Normal")) {
+        if (!strcmp((a->A + i)->state, "Normal")) {     // 分母合法的就append
             Append(c, (a->A + i)->value);
         }
     }
-    d = Quick_sort(c);
-    double pivot = *(c->A + 0);
-    printf("min = %2.2f\n", pivot);
+    d = Quick_sort(c);      // 排序一下
+    //print(d->n, d);
+
+    double pivot = *(d->A + 0);
+    printf("Minimal Value is %2.2f , position is ", pivot);
+    Dynamic_Array *tmp = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
+    tmp->A = (double *)calloc(1, sizeof(double));
+    if (tmp == NULL || tmp->A == NULL) {
+        printf("Can't get memory!\n");
+        return;
+    }
+    tmp->capacity = 1;
+    tmp->n = 0;
     for (i = 0; i < a->n; i++) {
-        if (!strcmp((a->A + i)->state, "Normal") && a->A->value == pivot) {
-            printf("%d", i);
+        if (!strcmp((a->A + i)->state, "Normal") && (a->A + i)->value == pivot) {
+            Append(tmp, ++i);
         }
     }
-    printf("\n");
+    print(tmp->n, tmp);
 }
 
 char *clean(char *string) {     // 已经后期优化，减去了字符串中所有的空格
@@ -388,30 +412,20 @@ double get_Number(char *string) {
     return ans;
 }
 
-void print(int n, Dynamic_Array *d) {
-    printf("argument %d is \n(", n);
-    int i;
-    for (i = 0; i < d->n - 1; i++) {
-        printf("%2.2f, ", *(d->A + i));
-    }
-    printf("%2.2f", *(d->A + i));
-    printf(")\n\n");
-}
-
 int main(int argc, char *argv[]) {
-    //if (argc != 3) {
-    //    printf("This function needs and only needs 2 arguments.\n");
-    //    return 0;
-    //}
-    //
-    //char *string_1 = *(argv + 1);
-    //char *string_2 = *(argv + 2);
+    if (argc != 3) {
+        printf("This function needs and only needs 2 arguments.\n");
+        return 0;
+    }
+    
+    char *string_1 = *(argv + 1);
+    char *string_2 = *(argv + 2);
 
-    char string_1_tmp[] = "( -3.14,-2 ,256, 0 ,6,5,12121,4588,-89)";
-    char *string_1 = string_1_tmp;
+    //char string_1_tmp[] = "( -3.14,20 ,-256, 0 ,6,5,12121,4588, 89)";
+    //char *string_1 = string_1_tmp;
 
-    char string_2_tmp[] = "(3.14, -1, 10333,3.2222,2,0,5633.2,168,78)";
-    char *string_2 = string_2_tmp;
+    //char string_2_tmp[] = "(3.14, -1, 256,3.2222,2,0,5633.2,168,78)";
+    //char *string_2 = string_2_tmp;
 
     string_1 = clean(string_1);
     string_2 = clean(string_2);
@@ -454,11 +468,13 @@ int main(int argc, char *argv[]) {
     ans.capacity = 1;
     ans.n = 0;
 
+    printf("argument 1 is\n");
     print(1, &c_1);
+    printf("argument 2 is\n");
     print(2, &c_2);
     Div_onArray(&c_1, &c_2, &ans);
     Div_print(&ans);
     find(&ans);
-    system("pause");
+    //system("pause");
     return 0;
 }
