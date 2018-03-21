@@ -147,6 +147,16 @@ void print(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
     printf(")\n\n");
 }
 
+void print_int(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
+    printf(/* "argument %d is \n*/"(");
+    int i;
+    for (i = 0; i < d->n - 1; i++) {
+        printf("%2.0f, ", *(d->A + i));
+    }
+    printf("%2.0f", *(d->A + i));
+    printf(")\n\n");
+}
+
 void Resize(Dynamic_Array *D) {
     int i = 0;
     double *tmp = (double *)calloc(2 * D->capacity, sizeof(double));
@@ -267,7 +277,7 @@ void find(Div_Dynamic_Array *a) {
             Append(tmp, ++i);
         }
     }
-    print(tmp->n, tmp);
+    print_int(tmp->n, tmp);
 }
 
 char *clean(char *string) {     // 已经后期优化，减去了字符串中所有的空格

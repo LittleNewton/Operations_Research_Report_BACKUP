@@ -70,3 +70,7 @@ Minimal value is -1.14, position is 9
 - 优化部分代码；
 - 修改报告Word文档的格式；
 - 用gcc调试，适用于Linux bash shell.
+
+## 2. 实验No.02 ```2017-03-21```
+
+　　实现一个简单的线性规划问题。
