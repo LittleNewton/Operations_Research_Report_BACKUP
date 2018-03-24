@@ -5,6 +5,11 @@
 Created on Wed Mar 14 19 : 10 : 28 2018
 
 @author: LiuPeng
+
+@version: 1.0
+
+last edit: 208-03-24 17:36
+
 */
 
 #include<stdio.h>
@@ -263,7 +268,6 @@ void find(Div_Dynamic_Array *a) {
     //print(d->n, d);
 
     double pivot = *(d->A + 0);
-    printf("Minimal Value is %2.2f , position is ", pivot);
     Dynamic_Array *tmp = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     tmp->A = (double *)calloc(1, sizeof(double));
     if (tmp == NULL || tmp->A == NULL) {
@@ -277,6 +281,11 @@ void find(Div_Dynamic_Array *a) {
             Append(tmp, ++i);
         }
     }
+    if (tmp->n == 0) {
+        printf("Sorry, no minimal value.\n");
+        return;
+    }
+    printf("Minimal Value is %2.2f , position is ", pivot);
     print_int(tmp->n, tmp);
 }
 
@@ -485,6 +494,7 @@ int main(int argc, char *argv[]) {
     Div_onArray(&c_1, &c_2, &ans);
     Div_print(&ans);
     find(&ans);
+
     //system("pause");
     return 0;
 }
