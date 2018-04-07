@@ -23,6 +23,7 @@
     <ProjectGuid>{3E71C9C1-060E-450F-823B-4000C7DB9A18}</ProjectGuid>
     <RootNamespace>linlrog</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>linProg</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

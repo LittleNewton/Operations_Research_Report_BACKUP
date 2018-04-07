@@ -21,28 +21,28 @@ last edit: 208-03-24 17:36
 typedef struct char_LinkedList {
     char_LinkedList *head;
     char elements;          // partition must be integer less than 10
-    int times;              // ÕâÊÇÒ»¸öÈİÆ÷£¬·ÅÖÃÒ»¸öÊı×é£¬ÓÃÖ¸Õë×÷ÎªÍ·
+    int times;              // è¿™æ˜¯ä¸€ä¸ªå®¹å™¨ï¼Œæ”¾ç½®ä¸€ä¸ªæ•°ç»„ï¼Œç”¨æŒ‡é’ˆä½œä¸ºå¤´
     char_LinkedList *next;
 }char_LinkedList;
 
 typedef struct Dynamic_Array {
-    double *A;              // µ×²ãÊı×é
-    int capacity;           // µ×²ãÊı×éµÄÈİÁ¿
-    int n;                  // µ×²ãÊı×éµÄÕ¼ÓÃÁ¿
+    double *A;              // åº•å±‚æ•°ç»„
+    int capacity;           // åº•å±‚æ•°ç»„çš„å®¹é‡
+    int n;                  // åº•å±‚æ•°ç»„çš„å ç”¨é‡
 }Dynamic_Array;
 
 typedef struct Div {
     double up;
     double down;
     double value;
-    char state[10];         // NaN or Negative£¬³¤¶È²»¶¨
-                            // Õâ¸östate±ØĞëÊÇmalloc¶øÀ´µÄ£¬¼á¾ö²»ÄÜÖ±½ÓÓÃ
+    char state[10];         // NaN or Negativeï¼Œé•¿åº¦ä¸å®š
+                            // è¿™ä¸ªstateå¿…é¡»æ˜¯mallocè€Œæ¥çš„ï¼Œåšå†³ä¸èƒ½ç›´æ¥ç”¨
 }Div;
 
 typedef struct Div_Dynamic_Array {
-    Div *A;             // µ×²ã½á¹¹ÌåÊı×éµÄÍ·Ö¸Õë£¬²»ÄÜ¶¯£¡
-    int capacity;       // µ×²ã½á¹¹ÌåÊı×éµÄÈİÁ¿
-    int n;              // µ×²ãÊı×éµÄÕ¼ÓÃÁ¿
+    Div *A;             // åº•å±‚ç»“æ„ä½“æ•°ç»„çš„å¤´æŒ‡é’ˆï¼Œä¸èƒ½åŠ¨ï¼
+    int capacity;       // åº•å±‚ç»“æ„ä½“æ•°ç»„çš„å®¹é‡
+    int n;              // åº•å±‚æ•°ç»„çš„å ç”¨é‡
 }Div_Dynamic_Array;
 
 void Div_Resize(Div_Dynamic_Array *D) {
@@ -56,11 +56,11 @@ void Div_Resize(Div_Dynamic_Array *D) {
         (tmp + i)->up = (D->A + i)->up;
         (tmp + i)->down = (D->A + i)->down;
         (tmp + i)->value = (D->A + i)->value;
-        strcpy((tmp + i)->state, (D->A + i)->state);            //²»ÄÜ¼òµ¥¸´ÖÆ£¬·ñÔò»áÄÚ´æ³ö´í
+        strcpy((tmp + i)->state, (D->A + i)->state);            //ä¸èƒ½ç®€å•å¤åˆ¶ï¼Œå¦åˆ™ä¼šå†…å­˜å‡ºé”™
     }
     free(D->A);
     D->A = tmp;
-    tmp = NULL;         // ±ÜÃâÒ°Ö¸Õë
+    tmp = NULL;         // é¿å…é‡æŒ‡é’ˆ
 
     D->capacity *= 2;
 }
@@ -142,7 +142,7 @@ void Div_onArray(Dynamic_Array *a, Dynamic_Array *b, Div_Dynamic_Array *ans) {
     }
 }
 
-void print(int n, Dynamic_Array *d) {   // Êä³öÒ»¸ö¶¯Ì¬µÄË«¾«¶ÈÊı×é
+void print(int n, Dynamic_Array *d) {   // è¾“å‡ºä¸€ä¸ªåŠ¨æ€çš„åŒç²¾åº¦æ•°ç»„
     printf(/* "argument %d is \n*/"(");
     int i;
     for (i = 0; i < d->n - 1; i++) {
@@ -152,7 +152,7 @@ void print(int n, Dynamic_Array *d) {   // Êä³öÒ»¸ö¶¯Ì¬µÄË«¾«¶ÈÊı×é
     printf(")\n\n");
 }
 
-void print_int(int n, Dynamic_Array *d) {   // Êä³öÒ»¸ö¶¯Ì¬µÄË«¾«¶ÈÊı×é
+void print_int(int n, Dynamic_Array *d) {   // è¾“å‡ºä¸€ä¸ªåŠ¨æ€çš„åŒç²¾åº¦æ•°ç»„
     printf(/* "argument %d is \n*/"(");
     int i;
     for (i = 0; i < d->n - 1; i++) {
@@ -260,11 +260,11 @@ void find(Div_Dynamic_Array *a) {
 
     int i = 0;
     for (i = 0; i < a->n; i++) {
-        if (!strcmp((a->A + i)->state, "Normal")) {     // ·ÖÄ¸ºÏ·¨µÄ¾Íappend
+        if (!strcmp((a->A + i)->state, "Normal")) {     // åˆ†æ¯åˆæ³•çš„å°±append
             Append(c, (a->A + i)->value);
         }
     }
-    d = Quick_sort(c);      // ÅÅĞòÒ»ÏÂ
+    d = Quick_sort(c);      // æ’åºä¸€ä¸‹
                             //print(d->n, d);
 
     double pivot = *(d->A + 0);
@@ -289,7 +289,7 @@ void find(Div_Dynamic_Array *a) {
     print_int(tmp->n, tmp);
 }
 
-char *clean(char *string) {     // ÒÑ¾­ºóÆÚÓÅ»¯£¬¼õÈ¥ÁË×Ö·û´®ÖĞËùÓĞµÄ¿Õ¸ñ
+char *clean(char *string) {     // å·²ç»åæœŸä¼˜åŒ–ï¼Œå‡å»äº†å­—ç¬¦ä¸²ä¸­æ‰€æœ‰çš„ç©ºæ ¼
     char *head = string;
     int count_space = 0;
     while (*string == ' ' && *string != '\0') {
@@ -298,7 +298,7 @@ char *clean(char *string) {     // ÒÑ¾­ºóÆÚÓÅ»¯£¬¼õÈ¥ÁË×Ö·û´®ÖĞËùÓĞµÄ¿Õ¸ñ
     }
     string = head;
 
-    int len = 1;    // ÓĞ'\0'£¬ËùÒÔÒª£«1
+    int len = 1;    // æœ‰'\0'ï¼Œæ‰€ä»¥è¦ï¼‹1
     while (*string != '\0') {
         len += 1;
         string++;
@@ -345,7 +345,7 @@ char *cut(char *string) {
 
 // Put an new element into the stack
 double get_Number(char *string) {
-    // ´«µİÒ»¸öÍêÕûµÄclean¹ıµÄ×Ö·û´®½øÀ´£¬°´ĞèÇĞ¸îÍ·²¿£¬Ê£ÏÂµÄÍ·×÷ÎªĞÂµÄÍ·¡£
+    // ä¼ é€’ä¸€ä¸ªå®Œæ•´çš„cleanè¿‡çš„å­—ç¬¦ä¸²è¿›æ¥ï¼ŒæŒ‰éœ€åˆ‡å‰²å¤´éƒ¨ï¼Œå‰©ä¸‹çš„å¤´ä½œä¸ºæ–°çš„å¤´ã€‚
     if (*string == '\0') {
         return NULL;
     }
@@ -366,26 +366,26 @@ double get_Number(char *string) {
         while (*string != ',') {
             work->elements = *string;
             work->times = i;
-            work->next = (char_LinkedList *)malloc(sizeof(char_LinkedList));    // ÉêÇë
+            work->next = (char_LinkedList *)malloc(sizeof(char_LinkedList));    // ç”³è¯·
             if (work->next == NULL) {
                 printf("Can't get memory!\n");
                 return 0.;
             }
-            work = work->next;                                                  // ÒÆ¶¯
+            work = work->next;                                                  // ç§»åŠ¨
             work->elements = NULL;
             work->times = NULL;
             string++;
-            i++;    // iÔÚºóÃæ»¹ÓĞÓÃ
+            i++;    // iåœ¨åé¢è¿˜æœ‰ç”¨
         }
 
-        work->elements = *string;       // ¶ººÅÒ²Òª¼ÓÉÏ
-        work->times = NULL;             // ¶ººÅµÄÖ¸Êı²»ÄÜÎªÓĞÒâÒåµÄ
+        work->elements = *string;       // é€—å·ä¹Ÿè¦åŠ ä¸Š
+        work->times = NULL;             // é€—å·çš„æŒ‡æ•°ä¸èƒ½ä¸ºæœ‰æ„ä¹‰çš„
 
         string++;
 
         work = head;
         int dot = 1;
-        int comma = 1;      // ¶ººÅµÄÓÃ´¦
+        int comma = 1;      // é€—å·çš„ç”¨å¤„
         int dot_index = NULL;
         while (work->elements != ',') {
             if (work->elements == '.') {
@@ -475,7 +475,7 @@ int main(int argc, char *argv[]) {
         Append(&c_2, get_Number(string_2));
         string_2 = cut(string_2);
     }
-    c_1.n -= 1;     // ÕâÒ²ÊÇÎŞÄÎÖ®¾Ù°¡£¬Ë­ÈÃ0.0 ==NULLÄØ
+    c_1.n -= 1;     // è¿™ä¹Ÿæ˜¯æ— å¥ˆä¹‹ä¸¾å•Šï¼Œè°è®©0.0 ==NULLå‘¢
     c_2.n -= 1;
 
     Div_Dynamic_Array ans;
