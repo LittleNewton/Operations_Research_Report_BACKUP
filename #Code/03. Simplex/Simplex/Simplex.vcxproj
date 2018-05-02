@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{18CABA6B-212A-4918-BB1A-6C3C3CB1949A}</ProjectGuid>
+    <ProjectGuid>{ABA208A3-A18C-4651-B545-DD71B02D6D32}</ProjectGuid>
     <RootNamespace>Simplex</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

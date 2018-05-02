@@ -26,7 +26,15 @@ typedef struct Matrix {
 Matrix *Matrix_init(int n_row, int n_column) {
     // This is a constructor for Matrix data type.
     Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
+    if (ans == NULL) {
+        printf("FUNCTION calloc can't get memory\nfatal error.");
+        return NULL;
+    }
     ans->low_level_array = (double *)calloc(n_row * n_column, sizeof(double));
+    if (ans->low_level_array == NULL) {
+        printf("FUNCTION calloc can't get memory\nfatal error.");
+        return NULL;
+    }
     ans->n_column = n_column;
     ans->n_row = n_row;
     return ans;
@@ -38,7 +46,7 @@ Matrix *Matrix_copy(Matrix *m) {
     int i = 0;
     int j = 0;
     for (; i < m->n_row; i++) {
-        for (; j < m->n_column; j++) {
+        for (j = 0; j < m->n_column; j++) {
             *(ans + i * ans->n_column + j) = \
                 *(m + i * m->n_column + j);
         }
@@ -83,7 +91,7 @@ Matrix *pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
 
     // Value Checking
     if (pivot == 0) {
-        printf("The pivot value should not be zero. Program error.");
+        printf("The pivot value should not be zero. Program error.\n");
         return NULL;
     }
 
@@ -103,6 +111,10 @@ Matrix *pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
 
 void Matrix_print(Matrix *matrix) {
     // print this Matrix formatly
+    if (matrix == NULL) {
+        printf("Null Matrix.\n");
+        return;
+    }
     int i;
     int j;
     for (i = 0; i < matrix->n_row; i++) {
@@ -131,21 +143,11 @@ int main(int argc, int *argv[]) {
     */
 
     Matrix *test = Matrix_init(2, 2);
-    double a[] = { 1, 3, 2, 5 };
+    double a[] = { 50, 60, 15, 53 };
     test->low_level_array = a;
-    test = number_mul_vector(3, 2, test);
-    Matrix_print(test);
-    printf("\n");
-
-    test = vector_add_vector(test, 1, 2);
-    Matrix_print(test);
-    printf("\n");
-
-    test = pivot_Element_Trans(test, 2, 2);
-    Matrix_print(test);
-    printf("\n");
-
+    test = pivot_Element_Trans(test, 2, 1);
     test = pivot_Element_Trans(test, 1, 1);
     Matrix_print(test);
+    system("pause");
     return 0;
 }
