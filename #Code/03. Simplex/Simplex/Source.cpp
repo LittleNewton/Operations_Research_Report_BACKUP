@@ -8,7 +8,7 @@ Created on Thu Apr 26 22 : 07 : 06 2018
 
 @author: Newton
 
-email: littleNewton6@outlook.com
+@email: littleNewton6@outlook.com
 */
 
 #include<stdio.h>
@@ -25,6 +25,7 @@ typedef struct Matrix {
 
 Matrix *Matrix_init(int n_row, int n_column) {
     // This is a constructor for Matrix data type.
+    // Matrix_init should be the only one constrctor of class Matrix.
     if (n_row == 0 || n_column == 0) {
         printf("Can't generate Matrix.\n");
         return NULL;
@@ -32,88 +33,83 @@ Matrix *Matrix_init(int n_row, int n_column) {
 
     Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
     if (ans == NULL) {
-        printf("fatal error: FUNCTION calloc can't get memory\n.");
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
         return NULL;
     }
 
     ans->low_level_array = (double *)calloc(n_row * n_column, sizeof(double));
     if (ans->low_level_array == NULL) {
-        printf("FUNCTION calloc can't get memory\nfatal error.");
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
         return NULL;
     }
 
-    ans->n_column = n_column;
     ans->n_row = n_row;
+    ans->n_column = n_column;
+
     return ans;
 }
 
-Matrix *Matrix_copy(const Matrix *mSource) {
+Matrix *Matrix_copy(const Matrix *mSrc) {
     // Generate a deep copy of Matrix mSource.
-    Matrix *mDestination = Matrix_init(mSource->n_row, mSource->n_column);
+    Matrix *mDest = Matrix_init(mSrc->n_row, mSrc->n_column);
     int i = 0;
     int j = 0;
-    for (; i < mSource->n_row; i++) {
-        for (j = 0; j < mSource->n_column; j++) {
-            *(mDestination + i * mDestination->n_column + j) = \
-                *(mSource + i * mSource->n_column + j);
+    for (; i < mSrc->n_row; i++) {
+        for (j = 0; j < mSrc->n_column; j++) {
+            *(mDest + i * mDest->n_column + j) = \
+                *(mSrc + i * mSrc->n_column + j);
         }
     }
-    return mDestination;
+    return mDest;
 }
 
-double Get_Matrix_Element(const Matrix *mSource, int i, int j) {
-    return *(mSource->low_level_array + (i - 1) * mSource->n_column + (j - 1));
+double Get_Matrix_Element(const Matrix *mSrc, int i, int j) {
+    return *(mSrc->low_level_array + (i - 1) * mSrc->n_column + (j - 1));
 }
 
-Matrix *number_mul_vector(double N, int n_row, Matrix *m) {
-    // Modify the old matrix, it needs to generate a new one.
+void num_mul_vector(double N, Matrix *Dest, int n_row) {
+    // Modify the old matrix.
     // This means N multiply the nth row of Matrix matrix.
-    Matrix *ans = Matrix_copy(m);
     int i;
-    for (i = 0; i < ans->n_column; i++) {
-        *(ans->low_level_array + (n_row - 1) * ans->n_column + i) *= N;
+    for (i = 0; i < Dest->n_column; i++) {
+        *(Dest->low_level_array + (n_row - 1) * Dest->n_column + i) *= N;
     }
-    return ans;
 }
 
-Matrix *vector_add_vector(Matrix *m, int target_row, int source_row) {
-    // Modify the old matrix, it needs to generate a new one.
+void vector_add_vector(Matrix *m, int DestRow, int SrcRow) {
+    // Modify the old matrix.
     // This means target row add source row in Matrix m.
-    Matrix *ans = Matrix_copy(m);
     int i;
     for (i = 0; i < m->n_column; i++) {
-        *(ans->low_level_array + (target_row - 1) * ans->n_column + i) += \
-            *(ans->low_level_array + (source_row - 1) * ans->n_column + i);
+        *(m->low_level_array + (DestRow - 1) * m->n_column + i) += \
+            *(m->low_level_array + (SrcRow - 1) * m->n_column + i);
     }
-    return ans;
 }
 
-Matrix *pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
+void pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
     // Modify the old matrix, it won't need to generate a new one.
     // It means the pivot element trans into 1 and the other elements in the same column
     // trans into zero. Value checking is needed in this function.
-    Matrix *ans = Matrix_copy(m);
-    double pivot = 0;
-    pivot = Get_Matrix_Element(m, pivot_row, pivot_column);
+    double pivot =  Get_Matrix_Element(m, pivot_row, pivot_column);
 
     // Value Checking
     if (pivot == 0) {
         printf("The pivot value should not be zero. Program error.\n");
-        return NULL;
+        return;
     }
 
     int i = 1;
-    for (; i <= ans->n_row; i++) {
-        double adjacent_Element = Get_Matrix_Element(ans, i, pivot_column);
+    for (; i <= m->n_row; i++) {
+        double adjacent_Element = Get_Matrix_Element(m, i, pivot_column);
         if (i != pivot_row && adjacent_Element != 0) {
-            ans = number_mul_vector(-1 * adjacent_Element / pivot, pivot_row, ans);
+            num_mul_vector(-1 * adjacent_Element / pivot, m, pivot_row);
             // Modify the Matrix to fit this row.
-            ans = vector_add_vector(ans, i, pivot_row);
+            vector_add_vector(m, i, pivot_row);
             pivot = Get_Matrix_Element(m, pivot_row, pivot_column);
-            ans = number_mul_vector(1 / pivot, pivot_row, ans);
+            // reset the const pivot
         }
     }
-    return ans;
+    num_mul_vector(1 / pivot, m, pivot_row);
 }
 
 void Matrix_print(Matrix *matrix) {
@@ -122,6 +118,7 @@ void Matrix_print(Matrix *matrix) {
         printf("Null Matrix.\n");
         return;
     }
+
     int i;
     int j;
     for (i = 0; i < matrix->n_row; i++) {
@@ -130,6 +127,7 @@ void Matrix_print(Matrix *matrix) {
         }
         printf("\n");
     }
+    printf("--------------*--------------\n");
 }
 
 typedef struct Simplex_Tab {
@@ -151,13 +149,20 @@ int main(int argc, int *argv[]) {
 
     Matrix *test = Matrix_init(3, 3);
     int i = 0;
-    double a[] = { 50, 60, 15, 53 ,22 ,10, 1, 2, 9.2 };
+    double a[] = { 50, 60, 15, 53 ,22 ,10, 11, 2, 8 };
     for (i = 0; i < 9; i++) {
         *(test->low_level_array + i) = a[i];
     }
-    test = pivot_Element_Trans(test, 1, 1);
-    test = pivot_Element_Trans(test, 2, 2);
     Matrix_print(test);
-    //system("pause");
+
+    pivot_Element_Trans(test, 1, 1);
+    Matrix_print(test);
+
+    pivot_Element_Trans(test, 2, 2);
+    Matrix_print(test);
+
+    free(test);
+
+    system("pause");
     return 0;
 }
