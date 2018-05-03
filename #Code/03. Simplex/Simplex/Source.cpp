@@ -11,24 +11,21 @@ Created on Thu Apr 26 22 : 07 : 06 2018
 @email: littleNewton6@outlook.com
 */
 
-#include "Matrix.h"
+/*
+EXAMPLE:
+Power Shell> Simplex "(c1, c2, c3)" "(a11, a12, a13, a14; a21, a22, a23, a24)" "(b1, b2)"
+Power Shell> Optimal solution found.
+x = 3 * 1
+x1
+x2
+x3
+This demo shows a user interface for this CLI based program.
+*/
 
-typedef struct Simplex_Tab {
-    Matrix *simplex_table;
-
-}Simplex_Tab;
+#include "Matrix_Operation.h"
 
 int main(int argc, char *argv[]) {
-    /*
-    EXAMPLE:
-    Power Shell> Simplex "(c1, c2, c3)" "(a11, a12, a13, a14; a21, a22, a23, a24)" "(b1, b2)"
-    Power Shell> Optimal solution found.
-    x = 3 * 1
-    x1
-    x2
-    x3
-    This demo shows a user interface for this CLI based program.
-    */
+
 
     Matrix *test = Matrix_init(3, 3);
     int i = 0;

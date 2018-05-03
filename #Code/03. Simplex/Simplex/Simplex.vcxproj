@@ -118,7 +118,9 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="matrix.h" />
+    <ClInclude Include="Divide.h" />
+    <ClInclude Include="Matrix_Operation.h" />
+    <ClInclude Include="Shell_Reader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

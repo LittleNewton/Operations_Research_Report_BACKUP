@@ -20,7 +20,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="matrix.h">
+    <ClInclude Include="Divide.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix_Operation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Shell_Reader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
