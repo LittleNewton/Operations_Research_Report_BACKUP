@@ -25,37 +25,44 @@ typedef struct Matrix {
 
 Matrix *Matrix_init(int n_row, int n_column) {
     // This is a constructor for Matrix data type.
-    Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
-    if (ans == NULL) {
-        printf("FUNCTION calloc can't get memory\nfatal error.");
+    if (n_row == 0 || n_column == 0) {
+        printf("Can't generate Matrix.\n");
         return NULL;
     }
+
+    Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
+    if (ans == NULL) {
+        printf("fatal error: FUNCTION calloc can't get memory\n.");
+        return NULL;
+    }
+
     ans->low_level_array = (double *)calloc(n_row * n_column, sizeof(double));
     if (ans->low_level_array == NULL) {
         printf("FUNCTION calloc can't get memory\nfatal error.");
         return NULL;
     }
+
     ans->n_column = n_column;
     ans->n_row = n_row;
     return ans;
 }
 
-Matrix *Matrix_copy(Matrix *m) {
-    // Generate a deep copy of Matrix m.
-    Matrix *ans = Matrix_init(m->n_row, m->n_column);
+Matrix *Matrix_copy(const Matrix *mSource) {
+    // Generate a deep copy of Matrix mSource.
+    Matrix *mDestination = Matrix_init(mSource->n_row, mSource->n_column);
     int i = 0;
     int j = 0;
-    for (; i < m->n_row; i++) {
-        for (j = 0; j < m->n_column; j++) {
-            *(ans + i * ans->n_column + j) = \
-                *(m + i * m->n_column + j);
+    for (; i < mSource->n_row; i++) {
+        for (j = 0; j < mSource->n_column; j++) {
+            *(mDestination + i * mDestination->n_column + j) = \
+                *(mSource + i * mSource->n_column + j);
         }
     }
-    return ans;
+    return mDestination;
 }
 
-double Get_Matrix_Element(Matrix *m, int i, int j) {
-    return *(m->low_level_array + (i - 1) * m->n_column + (j - 1));
+double Get_Matrix_Element(const Matrix *mSource, int i, int j) {
+    return *(mSource->low_level_array + (i - 1) * mSource->n_column + (j - 1));
 }
 
 Matrix *number_mul_vector(double N, int n_row, Matrix *m) {
@@ -142,12 +149,15 @@ int main(int argc, int *argv[]) {
     This demo shows a user interface for this CLI based program.
     */
 
-    Matrix *test = Matrix_init(2, 2);
-    double a[] = { 50, 60, 15, 53 };
-    test->low_level_array = a;
-    test = pivot_Element_Trans(test, 2, 1);
+    Matrix *test = Matrix_init(3, 3);
+    int i = 0;
+    double a[] = { 50, 60, 15, 53 ,22 ,10, 1, 2, 9.2 };
+    for (i = 0; i < 9; i++) {
+        *(test->low_level_array + i) = a[i];
+    }
     test = pivot_Element_Trans(test, 1, 1);
+    test = pivot_Element_Trans(test, 2, 2);
     Matrix_print(test);
-    system("pause");
+    //system("pause");
     return 0;
 }
