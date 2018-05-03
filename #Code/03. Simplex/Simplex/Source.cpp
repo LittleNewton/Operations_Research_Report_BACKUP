@@ -123,7 +123,7 @@ void Matrix_print(Matrix *matrix) {
     int j;
     for (i = 0; i < matrix->n_row; i++) {
         for (j = 0; j < matrix->n_column; j++) {
-            printf("%2.2f\t", Get_Matrix_Element(matrix, i + 1, j + 1));
+            printf("%8.4f\t", Get_Matrix_Element(matrix, i + 1, j + 1));
         }
         printf("\n");
     }
@@ -150,9 +150,10 @@ int main(int argc, int *argv[]) {
     Matrix *test = Matrix_init(3, 3);
     int i = 0;
     double a[] = { 50, 60, 15, 53 ,22 ,10, 11, 2, 8 };
-    for (i = 0; i < 9; i++) {
-        *(test->low_level_array + i) = a[i];
-    }
+    test->low_level_array = a;
+    //for (i = 0; i < 9; i++) {
+    //    *(test->low_level_array + i) = a[i];
+    //}
     Matrix_print(test);
 
     pivot_Element_Trans(test, 1, 1);
