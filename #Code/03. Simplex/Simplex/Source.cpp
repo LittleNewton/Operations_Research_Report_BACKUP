@@ -23,6 +23,7 @@ This demo shows a user interface for this CLI based program.
 */
 
 #include "Matrix_Operation.h"
+#include "Shell_Reader.h"
 
 int main(int argc, char *argv[]) {
 
@@ -30,10 +31,17 @@ int main(int argc, char *argv[]) {
     Matrix *test = Matrix_init(3, 3);
     int i = 0;
     double a[] = { 50, 60, 15, 53 ,22 ,10, 11, 2, 8 };
-    test->low_level_array = a;
-    //for (i = 0; i < 9; i++) {
-    //    *(test->low_level_array + i) = a[i];
-    //}
+
+    char c[] = "(50, 60, 15, 53, 22, 10, 11, 2, 8)";
+    printf("%s\n(", clean(c));
+
+    double *d = get_vector(c);
+    for (i = 0; i < 9; i++) {
+        printf("%2.0f ", *(d + i));
+    }
+    printf(")\n");
+
+    test->low_level_array = d;
     Matrix_print(test);
 
     pivot_Element_Trans(test, 1, 1);
