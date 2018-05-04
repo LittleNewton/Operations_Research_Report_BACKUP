@@ -13,7 +13,7 @@ Created on Thu Apr 26 22 : 07 : 06 2018
 
 /*
 EXAMPLE:
-Power Shell> Simplex "(c1, c2, c3)" "(a11, a12, a13, a14; a21, a22, a23, a24)" "(b1, b2)"
+Power Shell> Simplex "(-1,-1)" "(1,-2,1,1,0,0,0;-4,1,2,0,-1,1,0;-2,0,1,0,0,0,7)" "(11,3,1)"
 Power Shell> Optimal solution found.
 x = 3 * 1
 x1
@@ -27,21 +27,9 @@ This demo shows a user interface for this CLI based program.
 
 int main(int argc, char *argv[]) {
 
-
-    Matrix *test = Matrix_init(3, 3);
     int i = 0;
-    double a[] = { 50, 60, 15, 53 ,22 ,10, 11, 2, 8 };
-
-    char c[] = "(50, 60, 15, 53, 22, 10, 11, 2, 8)";
-    printf("%s\n(", clean(c));
-
-    double *d = get_vector(c);
-    for (i = 0; i < 9; i++) {
-        printf("%2.0f ", *(d + i));
-    }
-    printf(")\n");
-
-    test->low_level_array = d;
+    char c[] = "(1,-2, 1,1,0,0,0;-4,1,2,0,-1,1, 0;-2,0,1,0,0,0,1)";
+    Matrix *test = get_Matrix(c);
     Matrix_print(test);
 
     pivot_Element_Trans(test, 1, 1);

@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "Matrix_Operation.h"
 
 // container 1: char linked list
 // container 2: dynamic array
@@ -337,20 +338,25 @@ char *clean(char *string) {
     }
     *ans = *string;
     // Add '\0' to the tail of ans.
-    ans = ans_head + 1;
+    ans = ans_head;
     // Get rid of "(".
     string = head;
 
     for (; *ans != '\0'; ans++) {
         if (*(ans + 1) == '\0') {
-            *ans = ',';
+            *ans = ';';
         }
     }
-    return ans_head + 1;
+    if (*ans_head == '(') {
+        return ++ans_head;
+    }
+    else {
+        return ans_head;
+    }
 }
 
 char *cut(char *string) {
-    while (*string != ',') {
+    while (*string != ',' && *string != ';') {
         if (*string == '\0') {
             return '\0';
         }
@@ -377,7 +383,7 @@ double get_Number(char *string) {
 
         char_LinkedList *head = work;
         int i = 1;
-        while (*string != ',') {
+        while (*string != ',' && *string != ';') {
             work->elements = *string;
             work->times = i;
             work->next = (char_LinkedList *)calloc(1, sizeof(char_LinkedList));    // 申请
@@ -385,14 +391,14 @@ double get_Number(char *string) {
                 printf("fatal error: FUNCTION calloc can't get memory.\n");
                 return 0.;
             }
-            work = work->next;                                                  // 移动
+            work = work->next;                                                      // 移动
             work->elements = NULL;
             work->times = NULL;
             string++;
-            i++;    // i在后面还有用
+            i++;        // i在后面还有用
         }
 
-        work->elements = *string;       // The comma "," should be added, too.
+        work->elements = *string;       // "," and ";" should be added, too.
         work->times = NULL;             // 逗号的指数不能为有意义的
 
         string++;
@@ -402,7 +408,7 @@ double get_Number(char *string) {
         int dot = 1;
         int comma = 1;
         int dot_index = NULL;
-        while (work->elements != ',') {
+        while (work->elements != ',' && work->elements != ';') {
             if (work->elements == '.') {
                 dot_index = dot;
                 break;
@@ -424,7 +430,7 @@ double get_Number(char *string) {
 
         work = head;
 
-        while (work->elements != ',') {
+        while (work->elements != ',' && work->elements != ';') {
             if (work->elements == '.') {
                 work = work->next;
                 continue;
@@ -453,7 +459,7 @@ double *get_vector(char *string) {
     int i = 0;
     int count_comma = 0;
     while (*src != '\0') {
-        if (*src == ',') {
+        if (*src == ',' || *src == ';') {
             count_comma += 1;
         }
         src++;
@@ -470,5 +476,33 @@ double *get_vector(char *string) {
         *(ans + i) = get_Number(src);
         src = cut(src);
     }
+    return ans;
+}
+
+Matrix *get_Matrix(char *string) {
+    // Another constuctor. take care.
+    Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
+    char *src = clean(string);
+    char *src_head = src;
+
+    int count_semicolon = 0;
+    int column = 0;
+    while (*src != '\0') {
+        if (*src == ';') {
+            count_semicolon += 1;
+        }
+        src++;
+    }
+    src = src_head;
+    while (*src != ';') {
+        if (*src == ',') {
+            column += 1;
+        }
+        src++;
+    }
+    src = src_head;
+    ans->low_level_array = get_vector(src);
+    ans->n_row = count_semicolon;
+    ans->n_column = column + 1;
     return ans;
 }
