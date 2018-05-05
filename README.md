@@ -120,6 +120,6 @@ Power Shell> Optimal solution found.
 
 ### 2.4 自顶向下地看这个函数的设计
 
-!(Standard Pattern)[https://raw.githubusercontent.com/LittleNewton/Operations_Research_Report/master/%23Figure/03/01%20Standard%20Pattern.png]
+![Standard Pattern](https://raw.githubusercontent.com/LittleNewton/Operations_Research_Report/master/%23Figure/03/01%20Standard%20Pattern.png)
 
-两阶段法（double simplex method）是解决线性规划问题的常用方法，这个方法的建立基础是输入为标准形式。两阶段法是算法自动操作的，所以并不需要人为地去建立两个阶段的单纯形法去求解。所以，A就是标准形式下的系数矩阵
+两阶段法（double simplex method）是解决线性规划问题的常用方法，这个方法的建立基础是输入为标准形式。两阶段法是算法自动操作的，所以并不需要人为地去建立两个阶段的单纯形法去求解。所以，A就是标准形式下的系数矩阵。
