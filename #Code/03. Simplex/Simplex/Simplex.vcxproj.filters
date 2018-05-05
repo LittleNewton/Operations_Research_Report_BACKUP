@@ -29,5 +29,11 @@
     <ClInclude Include="Shell_Reader.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Simplex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dynamic_Array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

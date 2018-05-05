@@ -83,7 +83,7 @@ void num_mul_vector(double N, Matrix *Dest, int n_row) {
 
 void vector_add_vector(Matrix *m, int DestRow, int SrcRow) {
     // Modify the old matrix.
-    // This means target row add source row in Matrix m.
+    // This means target-row add source-row in Matrix m.
     int i;
     for (i = 0; i < m->n_column; i++) {
         *(m->low_level_array + (DestRow - 1) * m->n_column + i) += \

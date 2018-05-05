@@ -1,5 +1,7 @@
 ﻿  Source.cpp
-d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\matrix_operation.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(474): warning C4101: “k”: 未引用的局部变量
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\matrix_operation.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\dynamic_array.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\simplex.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   Simplex.vcxproj -> D:\Nutstore\myStudyMaterial\Grade_3_Term_2\#Operations_Research\Operations_Research_Report\#Code\03. Simplex\Debug\Simplex.exe
