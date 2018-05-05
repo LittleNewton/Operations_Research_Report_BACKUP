@@ -14,7 +14,10 @@
 */
 
 
+
 #pragma once
+
+#define INIT_SIZE   8
 
 typedef struct Dynamic_Array {
     double *A;
@@ -22,7 +25,36 @@ typedef struct Dynamic_Array {
     int n;
 } Dynamic_Array;
 
-void print(int n, Dynamic_Array *d) {
+Dynamic_Array *Dynamic_Array_init(void) {
+    // Create a new empty dynamic array.
+    Dynamic_Array *ans = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
+    if (ans == NULL) {
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
+        return NULL;
+    }
+
+    ans->A = (double *)calloc(INIT_SIZE, sizeof(double));
+    ans->capacity = INIT_SIZE;
+    ans->n = 0;
+    return ans;
+}
+
+Dynamic_Array *Dynamic_Array_init2(double *A, int n){
+    // A constructor for dynamic array.
+    // Construction can be done with a double array has been input.
+    Dynamic_Array *ans = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
+    if (ans == NULL) {
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
+        return NULL;
+    }
+
+    ans->A = A;
+    ans->capacity = 2 * n;
+    ans->n = n;
+    return ans;
+}
+
+void Dynamic_Array_print(int n, Dynamic_Array *d) {
     printf(/* "argument %d is \n*/"(");
     int i;
     for (i = 0; i < d->n - 1; i++) {
@@ -32,7 +64,7 @@ void print(int n, Dynamic_Array *d) {
     printf(")\n\n");
 }
 
-void print_int(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
+void Dynamic_Array_print_int(int n, Dynamic_Array *d) {
     printf(/* "argument %d is \n*/"(");
     int i;
     for (i = 0; i < d->n - 1; i++) {
@@ -64,8 +96,17 @@ void Dynamic_Array_append(Dynamic_Array *D, double e) {
     D->n += 1;
 }
 
-Dynamic_Array *Quick_sort(Dynamic_Array *a) {
+double Dynamic_Array_get_Element(Dynamic_Array *d, int n) {
+    // Get the element located in n.
+    // Take care, n is the natural location, so it need to minus 
+    // one during the locating process.
+    return *(d->A + n - 1);
+}
 
+Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a) {
+    // Generate a new dynamic array to contain the answer, the source dynamic array
+    // won't be changed.
+    // The index of dynamic array begins from 1 rather zero.
     Dynamic_Array *less = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     less->A = (double *)calloc(1, sizeof(double));
     if (!less) {
@@ -115,8 +156,8 @@ Dynamic_Array *Quick_sort(Dynamic_Array *a) {
             }
         }
     }
-    less = Quick_sort(less);
-    more = Quick_sort(more);
+    less = Dynamic_Array_quick_Sort(less);
+    more = Dynamic_Array_quick_Sort(more);
     for (i = 0; i < eq->n; i++) {
         Dynamic_Array_append(less, *(eq->A + i));
     }
@@ -124,4 +165,15 @@ Dynamic_Array *Quick_sort(Dynamic_Array *a) {
         Dynamic_Array_append(less, *(more->A + i));
     }
     return less;
+}
+
+int Dynamic_Array_find_Maximal(Dynamic_Array *d, int n) {
+    // This function is created for find the maximal value in objective function.
+    double pivot = *(Dynamic_Array_quick_Sort(d)->A + n-1);
+    int i = 0;
+    for (; i < n; i++) {
+        if (*(d->A + i) == pivot) {
+            return i + 1;
+        }
+    }
 }

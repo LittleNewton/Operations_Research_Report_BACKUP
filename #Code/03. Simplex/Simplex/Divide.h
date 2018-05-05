@@ -18,6 +18,15 @@
 
 #pragma once
 
+#include <string.h>
+#include "Dynamic_Array.h"
+
+
+#define NEGATIVE            "Negative"
+#define NOT_A_NUMBER        "NAN"
+#define NORMAL              "Normal"
+#define INIT_SIZE_DIV       8
+
 typedef struct Div {
     // This is a new division supporting structure.
     // If up/down can be done, value will maintain this value.
@@ -37,6 +46,17 @@ typedef struct Div_Dynamic_Array {
     int capacity;
     int n;
 } Div_Dynamic_Array;
+
+//Div *Div_init(double a, double b) {
+//    // Generate a node.
+//    Div *ans = (Div *)calloc(1, sizeof(Div));
+//    if (b < 0) {
+//        char state[] = NEGATIVE;
+//        ans->up = a;
+//        ans->down = b;
+//        strcpy(ans.state, NEGATIVE);
+//    }
+//}
 
 void Div_Dynamic_Array_resize(Div_Dynamic_Array *D) {
     int i = 0;
@@ -67,38 +87,22 @@ void Div_Dynamic_Array_append(Div_Dynamic_Array *D, Div e) {
     (D->A + D->n)->value = e.value;
     strcpy((D->A + D->n)->state, e.state);
     D->n += 1;
-    //int i;
-    //for (i = 0; i <= D->n; i++) {
-    //  printf("%s\t", (D->A + i)->state);
-    //}
-    //printf("\n");
 }
 
-void Div_Dynamic_Array_print(Div_Dynamic_Array *d) {
-    int i;
-    printf("The answer C = (");
-    for (i = 0; i < d->n; i++) {
-        if (!strcmp((d->A + i)->state, "NaN")) {
-            printf("%s ", "NaN");
-        }
-        else {
-            double value = (d->A + i)->value;
-            printf("%2.2f ", value);
-        }
-        if (i == d->n - 1) {
-            printf("");
-        }
-        else {
-            printf(", ");
-        }
+Div_Dynamic_Array *Div_Dynamic_Array_init(Dynamic_Array *a, Dynamic_Array *b) {
+    // Generate a new empty div dynamic array.
+    Div_Dynamic_Array *ans = (Div_Dynamic_Array *)calloc(1, sizeof(Div_Dynamic_Array));
+    if (ans == NULL) {
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
+        return NULL;
     }
-    printf(")\n");
-}
+    ans->A = (Div *)calloc(INIT_SIZE_DIV, sizeof(Div));
+    ans->capacity = INIT_SIZE_DIV;
+    ans->n = 0;
 
-void Div_onArray(Dynamic_Array *a, Dynamic_Array *b, Div_Dynamic_Array *ans) {
     if (a->n != b->n) {
         printf("length should be the same.");
-        return;
+        return NULL;
     }
 
     int i;
@@ -133,16 +137,38 @@ void Div_onArray(Dynamic_Array *a, Dynamic_Array *b, Div_Dynamic_Array *ans) {
             }
         }
     }
+    return ans;
 }
 
-void find(Div_Dynamic_Array *a) {
+void Div_Dynamic_Array_print(Div_Dynamic_Array *d) {
+    int i;
+    printf("The answer C = (");
+    for (i = 0; i < d->n; i++) {
+        if (!strcmp((d->A + i)->state, "NaN")) {
+            printf("%s ", "NaN");
+        }
+        else {
+            double value = (d->A + i)->value;
+            printf("%2.2f ", value);
+        }
+        if (i == d->n - 1) {
+            printf("");
+        }
+        else {
+            printf(", ");
+        }
+    }
+    printf(")\n");
+}
+
+int Div_Dynamic_Array_find_Minimal(Div_Dynamic_Array *a) {
     // 
     Dynamic_Array *c = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     Dynamic_Array *d = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     c->A = (double *)calloc(a->n, sizeof(double));
     if (c == NULL || d == NULL || c->A == NULL) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
-        return;
+        return NULL;
     }
     c->capacity = a->n;
     c->n = 0;
@@ -153,15 +179,16 @@ void find(Div_Dynamic_Array *a) {
             Dynamic_Array_append(c, (a->A + i)->value);
         }
     }
-    d = Quick_sort(c);
+    d = Dynamic_Array_quick_Sort(c);
 
     double pivot = *(d->A + 0);
     Dynamic_Array *tmp = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     tmp->A = (double *)calloc(1, sizeof(double));
     if (tmp == NULL || tmp->A == NULL) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
-        return;
+        return NULL;
     }
+
     tmp->capacity = 1;
     tmp->n = 0;
     for (i = 0; i < a->n; i++) {
@@ -171,8 +198,9 @@ void find(Div_Dynamic_Array *a) {
     }
     if (tmp->n == 0) {
         printf("Sorry, no minimal value.\n");
-        return;
+        return NULL;
     }
-    printf("Minimal Value is %2.0f , position is ", pivot);
-    print_int(tmp->n, tmp);
+    //printf("Minimal Value is %2.0f , position is ", pivot);
+    //Dynamic_Array_print_int(tmp->n, tmp);
+    return int(*(tmp->A));
 }

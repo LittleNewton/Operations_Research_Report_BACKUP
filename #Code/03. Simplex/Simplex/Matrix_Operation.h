@@ -20,6 +20,8 @@
 #include<stdlib.h>
 #include<math.h>
 
+#include "Dynamic_Array.h"
+
 typedef struct Matrix {
     // The INDEX begin with 1 rather 0 is reasonable.
     // TRY make this program behave like MATLAB linprog.
@@ -68,11 +70,11 @@ Matrix *Matrix_copy(const Matrix *mSrc) {
     return mDest;
 }
 
-double Get_Matrix_Element(const Matrix *mSrc, int i, int j) {
+double Matrix_get_Element(const Matrix *mSrc, int i, int j) {
     return *(mSrc->low_level_array + (i - 1) * mSrc->n_column + (j - 1));
 }
 
-void num_mul_vector(double N, Matrix *Dest, int n_row) {
+void Matrix_num_mul_vector(double N, Matrix *Dest, int n_row) {
     // Modify the old matrix.
     // This means N multiply the nth row of Matrix matrix.
     int i;
@@ -81,7 +83,7 @@ void num_mul_vector(double N, Matrix *Dest, int n_row) {
     }
 }
 
-void vector_add_vector(Matrix *m, int DestRow, int SrcRow) {
+void Matrix_row_add_row(Matrix *m, int DestRow, int SrcRow) {
     // Modify the old matrix.
     // This means target-row add source-row in Matrix m.
     int i;
@@ -91,11 +93,11 @@ void vector_add_vector(Matrix *m, int DestRow, int SrcRow) {
     }
 }
 
-void pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
+void Matrix_pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
     // Modify the old matrix, it won't need to generate a new one.
     // It means the pivot element trans into 1 and the other elements in the same column
     // trans into zero. Value checking is needed in this function.
-    double pivot = Get_Matrix_Element(m, pivot_row, pivot_column);
+    double pivot = Matrix_get_Element(m, pivot_row, pivot_column);
 
     // Value Checking
     if (pivot == 0) {
@@ -105,16 +107,27 @@ void pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
 
     int i = 1;
     for (; i <= m->n_row; i++) {
-        double adjacent_Element = Get_Matrix_Element(m, i, pivot_column);
+        double adjacent_Element = Matrix_get_Element(m, i, pivot_column);
         if (i != pivot_row && adjacent_Element != 0) {
-            num_mul_vector(-1 * adjacent_Element / pivot, m, pivot_row);
+            Matrix_num_mul_vector(-1 * adjacent_Element / pivot, m, pivot_row);
             // Modify the Matrix to fit this row.
-            vector_add_vector(m, i, pivot_row);
-            pivot = Get_Matrix_Element(m, pivot_row, pivot_column);
+            Matrix_row_add_row(m, i, pivot_row);
+            pivot = Matrix_get_Element(m, pivot_row, pivot_column);
             // reset the const pivot
         }
     }
-    num_mul_vector(1 / pivot, m, pivot_row);
+    Matrix_num_mul_vector(1 / pivot, m, pivot_row);
+}
+
+Dynamic_Array *Matrix_column_to_Vector(Matrix *m, int column_num) {
+    int i = 1;
+    Dynamic_Array *ans = Dynamic_Array_init();
+
+    for (; i <= m->n_row; i++) {
+        //double tmp = Matrix_get_Element(m, i, column_num);
+        Dynamic_Array_append(ans, Matrix_get_Element(m, i, column_num));
+    }
+    return ans;
 }
 
 void Matrix_print(Matrix *matrix) {
@@ -128,7 +141,7 @@ void Matrix_print(Matrix *matrix) {
     int j;
     for (i = 0; i < matrix->n_row; i++) {
         for (j = 0; j < matrix->n_column; j++) {
-            printf("%8.4f\t", Get_Matrix_Element(matrix, i + 1, j + 1));
+            printf("%8.4f\t", Matrix_get_Element(matrix, i + 1, j + 1));
         }
         printf("\n");
     }
