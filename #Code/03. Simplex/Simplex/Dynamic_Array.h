@@ -13,11 +13,10 @@
 * 预期版本：可以加入矩阵求逆等新的方法
 */
 
-
-
 #pragma once
 
-#define INIT_SIZE   8
+#define INIT_SIZE       8
+#include "Shell_Reader.h"
 
 typedef struct Dynamic_Array {
     double *A;
@@ -39,39 +38,19 @@ Dynamic_Array *Dynamic_Array_init(void) {
     return ans;
 }
 
-Dynamic_Array *Dynamic_Array_init2(double *A, int n){
-    // A constructor for dynamic array.
-    // Construction can be done with a double array has been input.
-    Dynamic_Array *ans = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
-    if (ans == NULL) {
-        printf("fatal error: FUNCTION calloc can't get memory.\n");
-        return NULL;
-    }
-
-    ans->A = A;
-    ans->capacity = 2 * n;
-    ans->n = n;
-    return ans;
+double Dynamic_Array_get_Element(Dynamic_Array *d, int n) {
+    // Get the element located in n.
+    // Take care, n is the natural location, so it need to minus 
+    // one during the locating process.
+    return *(d->A + n - 1);
 }
 
-void Dynamic_Array_print(int n, Dynamic_Array *d) {
-    printf(/* "argument %d is \n*/"(");
-    int i;
-    for (i = 0; i < d->n - 1; i++) {
-        printf("%2.2f, ", *(d->A + i));
+void Dynamic_Array_print(Dynamic_Array *d) {
+    int i = 1;
+    for (; i <= d->n; i++) {
+        printf("%8.2f\t", Dynamic_Array_get_Element(d, i));
     }
-    printf("%2.2f", *(d->A + i));
-    printf(")\n\n");
-}
-
-void Dynamic_Array_print_int(int n, Dynamic_Array *d) {
-    printf(/* "argument %d is \n*/"(");
-    int i;
-    for (i = 0; i < d->n - 1; i++) {
-        printf("%2.0f, ", *(d->A + i));
-    }
-    printf("%2.0f", *(d->A + i));
-    printf(")\n\n");
+    printf("\n");
 }
 
 void Dynamic_Array_resize(Dynamic_Array *D) {
@@ -94,13 +73,6 @@ void Dynamic_Array_append(Dynamic_Array *D, double e) {
     }
     *(D->A + D->n) = e;
     D->n += 1;
-}
-
-double Dynamic_Array_get_Element(Dynamic_Array *d, int n) {
-    // Get the element located in n.
-    // Take care, n is the natural location, so it need to minus 
-    // one during the locating process.
-    return *(d->A + n - 1);
 }
 
 Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a) {
@@ -167,11 +139,11 @@ Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a) {
     return less;
 }
 
-int Dynamic_Array_find_Maximal(Dynamic_Array *d, int n) {
-    // This function is created for find the maximal value in objective function.
-    double pivot = *(Dynamic_Array_quick_Sort(d)->A + n-1);
+int Dynamic_Array_find_Maximal(Dynamic_Array *d) {
+    // This function is created for find the maximal value's index in objective function.
+    double pivot = Dynamic_Array_get_Element(Dynamic_Array_quick_Sort(d), d->n);
     int i = 0;
-    for (; i < n; i++) {
+    for (; i < d->n; i++) {
         if (*(d->A + i) == pivot) {
             return i + 1;
         }

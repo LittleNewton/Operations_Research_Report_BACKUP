@@ -22,9 +22,12 @@ x3
 This demo shows a user interface for this CLI based program.
 */
 
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "Shell_Reader.h"
 #include "Matrix_Operation.h"
@@ -41,28 +44,33 @@ int main(int argc, char *argv[]) {
     char basic_var[] = "(3,4,5)";
     char Non_basic_var[] = "(1,2)";
 
-    Dynamic_Array *ddd = Dynamic_Array_init2(get_Vector(b), get_Matrix(b)->n_column);
-    Matrix_print(get_Matrix(b));
+    printf("%s\n", b);
 
-    int jj = Dynamic_Array_find_Maximal(ddd, get_Matrix(b)->n_column);
-    printf("%d\t, %8.4f\n", jj, Dynamic_Array_get_Element(ddd, jj));
+    Dynamic_Array *da = get_Dynamic_Array(b);
+    Dynamic_Array_print(da);
 
-    Matrix *test = get_Matrix(A);
-    double *Basic_var = get_Vector(basic_var);
+    //Dynamic_Array *ddd = Dynamic_Array_init_nonempty(b);
+    //Matrix_print(get_Matrix(b));
 
-    printf("---------ooooooooooooooooooooo-----\n");
-    Dynamic_Array *ccc = Dynamic_Array_init();
-    ccc = Matrix_column_to_Vector(test, 1);
-    Dynamic_Array_print(3,ccc);
-    printf("---------ooooooooooooooooooooo-----\n");
+    //int jj = Dynamic_Array_find_Maximal(ddd, get_Matrix(b)->n_column);
+    //printf("%d\t, %8.4f\n", jj, Dynamic_Array_get_Element(ddd, jj));
 
-    Matrix_print(test);
+    //Matrix *test = get_Matrix(A);
+    //double *Basic_var = get_Vector(basic_var);
 
-    Matrix *d = Matrix_init(3, 3);
-    Matrix_print(d);
-    Matrix_print(d);
+    //printf("---------ooooooooooooooooooooo-----\n");
+    //Dynamic_Array *ccc = Dynamic_Array_init();
+    //ccc = Matrix_column_to_Vector(test, 1);
+    //Dynamic_Array_print(3,ccc);
+    //printf("---------ooooooooooooooooooooo-----\n");
 
-    free(test);
+    //Matrix_print(test);
+
+    //Matrix *d = Matrix_init(3, 3);
+    //Matrix_print(d);
+    //Matrix_print(d);
+
+    //free(test);
 
     system("pause");
     return 0;

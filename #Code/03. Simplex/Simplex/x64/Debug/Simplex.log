@@ -1,0 +1,152 @@
+﻿  Source.cpp
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\matrix_operation.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\dynamic_array.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(257): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(257): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(257): error C2059: 语法错误:“{”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(257): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(257): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(74): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: 参见“strcpy”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(90): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: 参见“strcpy”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(94): error C2065: “Dynamic_Array”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(94): error C2065: “a”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(94): error C2065: “b”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(94): error C2448: “Div_Dynamic_Array_init”: 函数样式初始值设定项类似函数定义
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(168): error C2065: “Dynamic_Array”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(168): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(168): error C2059: 语法错误:“)”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(169): error C2065: “Dynamic_Array”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(169): error C2065: “d”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(169): error C2059: 语法错误:“)”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(170): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(170): error C2227: “->A”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(170): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(171): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(171): error C2065: “d”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(171): error C2227: “->A”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(171): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(175): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(175): error C2227: “->capacity”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(175): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(176): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(176): error C2227: “->n”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(176): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(181): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(181): error C3861: “Dynamic_Array_append”: 找不到标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(184): error C2065: “d”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(184): error C2065: “c”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(184): error C3861: “Dynamic_Array_quick_Sort”: 找不到标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(186): error C2065: “d”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(186): error C2227: “->A”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(186): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(187): error C2065: “Dynamic_Array”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(187): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(187): error C2059: 语法错误:“)”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(188): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(188): error C2227: “->A”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(188): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(189): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(189): error C2227: “->A”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(189): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(194): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(194): error C2227: “->capacity”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(194): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(195): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(195): error C2227: “->n”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(195): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(198): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(198): error C3861: “Dynamic_Array_append”: 找不到标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(201): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(201): error C2227: “->n”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(201): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(207): error C2065: “tmp”: 未声明的标识符
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(207): error C2227: “->A”的左边必须指向类/结构/联合/泛型类型
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h(207): note: 类型是“unknown-type”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): error C2011: “char_LinkedList”:“struct”类型重定义
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(36): error C2084: 函数“char *clean(char *)”已有主体
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(36): note: 参见“clean”的前一个定义
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(92): error C2084: 函数“char *cut(char *)”已有主体
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(92): note: 参见“cut”的前一个定义
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(104): error C2084: 函数“double get_Number(char *)”已有主体
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(104): note: 参见“get_Number”的前一个定义
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(122): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(122): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(123): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(123): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(124): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(124): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(125): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(125): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(129): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(129): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(130): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(130): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(131): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(131): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(136): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(136): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(137): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(137): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(146): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(146): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(147): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(147): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(151): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(151): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(161): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(161): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(162): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(162): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(163): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(163): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(168): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(168): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(169): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(169): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(170): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(170): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(173): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(173): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(174): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(174): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(174): error C2660: “pow”: 函数不接受 1 个参数
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(174): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(175): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(175): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(178): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(178): error C2227: “->times”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(178): error C2660: “pow”: 函数不接受 1 个参数
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(178): error C2227: “->elements”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(179): error C2027: 使用了未定义类型“char_LinkedList”
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(28): note: 参见“char_LinkedList”的声明
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(179): error C2227: “->next”的左边必须指向类/结构/联合/泛型类型
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h(179): fatal error C1003: 错误计数超过 100；正在停止编译

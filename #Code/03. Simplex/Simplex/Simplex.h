@@ -27,21 +27,22 @@ typedef struct Simplex_Tableau {
     Matrix *Simplex_Coefficent_Matrix;
     Dynamic_Array *Objective_Vector;
     Dynamic_Array *b;
-    int *Non_Basic_Var;     // decision variable
-    int *Basic_Var;         // 
+    Dynamic_Array *Non_Basic_Var;     // decision variable
+    Dynamic_Array *Basic_Var;         // 
 } Simplex_Talbe;
 
-Simplex_Tableau *init(Dynamic_Array *c, Matrix *A, Dynamic_Array *b, int *Basic_var, int *Non_Basic_var) {
+Simplex_Tableau *init(char *c, char *A, char *b, char *Basic_var, char *Non_Basic_var) {
     // Initialize the table of simplex method.
     // This is a simple implementation, only can solve problems like "Ax = b"
     // with all the slack variables has been added.
     Simplex_Tableau *ans = (Simplex_Tableau *)calloc(1, sizeof(Simplex_Tableau));
-    ans->Simplex_Coefficent_Matrix = A;
-    ans->Objective_Vector = c;
-    ans->b = b;
 
-    ans->Basic_Var = Basic_var;
-    ans->Non_Basic_Var = Non_Basic_var;
+    ans->Simplex_Coefficent_Matrix = get_Matrix(A);
+    ans->Objective_Vector = get_Dynamic_Array(c);
+    ans->b = get_Dynamic_Array(b);
+
+    ans->Basic_Var = get_Dynamic_Array(Basic_var);
+    ans->Non_Basic_Var = get_Dynamic_Array(Non_Basic_var);
 
     return ans;
 }
@@ -50,7 +51,7 @@ void Simplex_trans(Simplex_Tableau S) {
     // Iterations for simplex method.
     Dynamic_Array *object = S.Objective_Vector;
 
-    int max_location = Dynamic_Array_find_Maximal(object, object->n);
+    int max_location = Dynamic_Array_find_Maximal(object);
     double max = Dynamic_Array_get_Element(object, max_location);
 
     Dynamic_Array *pivot_column = Matrix_column_to_Vector(S.Simplex_Coefficent_Matrix, max_location);

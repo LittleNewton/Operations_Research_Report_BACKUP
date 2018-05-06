@@ -15,20 +15,12 @@
 * 完成日期：
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+
+#pragma once
 
 #include "Matrix_Operation.h"
 #include "Dynamic_Array.h"
 #include "Divide.h"
-
-// container 1: char linked list
-// container 2: dynamic array
-// container 3: div
-// container 4: div dynamic array
-
 
 typedef struct char_LinkedList {
     // This is a container for creating a stack data structure.
@@ -218,6 +210,21 @@ double *get_Vector(char *string) {
     return ans;
 }
 
+int get_vector_Length(char *string) {
+    // Input a string, output its length of the vector consists of double elements.
+    char *src = clean(string);
+    char *src_head = src;
+    int i = 0;
+    int count_comma = 0;
+    while (*src != '\0') {
+        if (*src == ',' || *src == ';') {
+            count_comma += 1;
+        }
+        src++;
+    }
+    return count_comma;
+}
+
 int *get_INT_vector(char *string) {
     // Input a string, output a vector consists of double elements.
     char *src = clean(string);
@@ -247,6 +254,10 @@ int *get_INT_vector(char *string) {
 Matrix *get_Matrix(char *string) {
     // Another constuctor. take care.
     Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
+    if (ans == NULL) {
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
+        return NULL;
+    }
     char *src = clean(string);
     char *src_head = src;
 
@@ -269,5 +280,18 @@ Matrix *get_Matrix(char *string) {
     ans->low_level_array = get_Vector(src);
     ans->n_row = count_semicolon;
     ans->n_column = column + 1;
+    return ans;
+}
+
+Dynamic_Array *get_Dynamic_Array(char *string) {
+    Dynamic_Array *ans = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
+    if (ans == NULL) {
+        printf("fatal error: FUNCTION calloc can't get memory.\n");
+        return NULL;
+    }
+    Matrix *tmp = get_Matrix(string);
+    ans->A = tmp->low_level_array;
+    ans->n = tmp->n_column  * tmp->n_row;
+    ans->capacity = 2 * ans->n;
     return ans;
 }

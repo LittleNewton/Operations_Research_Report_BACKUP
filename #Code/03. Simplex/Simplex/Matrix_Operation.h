@@ -13,12 +13,8 @@
 * 预期版本：可以加入矩阵求逆等新的方法
 */
 
+
 #pragma once
-
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
 
 #include "Dynamic_Array.h"
 

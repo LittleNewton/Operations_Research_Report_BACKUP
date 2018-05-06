@@ -47,17 +47,6 @@ typedef struct Div_Dynamic_Array {
     int n;
 } Div_Dynamic_Array;
 
-//Div *Div_init(double a, double b) {
-//    // Generate a node.
-//    Div *ans = (Div *)calloc(1, sizeof(Div));
-//    if (b < 0) {
-//        char state[] = NEGATIVE;
-//        ans->up = a;
-//        ans->down = b;
-//        strcpy(ans.state, NEGATIVE);
-//    }
-//}
-
 void Div_Dynamic_Array_resize(Div_Dynamic_Array *D) {
     int i = 0;
     Div *tmp = (Div *)calloc(2 * D->capacity, sizeof(Div));
