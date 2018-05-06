@@ -29,9 +29,9 @@ typedef struct Simplex_Tableau {
     Dynamic_Array *b;
     Dynamic_Array *Non_Basic_Var;     // decision variable
     Dynamic_Array *Basic_Var;         // 
-} Simplex_Talbe;
+} Simplex_Talbeau;
 
-Simplex_Tableau *init(char *c, char *A, char *b, char *Basic_var, char *Non_Basic_var) {
+Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b, char *Basic_var, char *Non_Basic_var) {
     // Initialize the table of simplex method.
     // This is a simple implementation, only can solve problems like "Ax = b"
     // with all the slack variables has been added.
@@ -47,20 +47,20 @@ Simplex_Tableau *init(char *c, char *A, char *b, char *Basic_var, char *Non_Basi
     return ans;
 }
 
-void Simplex_trans(Simplex_Tableau S) {
+void Simplex_trans(Simplex_Tableau *S) {
     // Iterations for simplex method.
-    Dynamic_Array *object = S.Objective_Vector;
+    Dynamic_Array *object = S->Objective_Vector;
 
     int max_location = Dynamic_Array_find_Maximal(object);
     double max = Dynamic_Array_get_Element(object, max_location);
 
-    Dynamic_Array *pivot_column = Matrix_column_to_Vector(S.Simplex_Coefficent_Matrix, max_location);
+    Dynamic_Array *pivot_column = Matrix_column_to_Vector(S->Simplex_Coefficent_Matrix, max_location);
 
-    
-    Div_Dynamic_Array *tmp = Div_Dynamic_Array_init(S.b, pivot_column);
+    Div_Dynamic_Array *tmp = Div_Dynamic_Array_init(S->b, pivot_column);
 
     Div_Dynamic_Array_find_Minimal(tmp);
 
+    printf("%d\t", tmp);
     while (max > 0) {
         
     }

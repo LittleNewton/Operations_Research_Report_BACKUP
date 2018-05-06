@@ -1,1 +1,9 @@
-﻿
+﻿  Source.cpp
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\shell_reader.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\matrix_operation.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\dynamic_array.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\divide.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\simplex.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\simplex.h(63): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“Div_Dynamic_Array *”
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\03. simplex\simplex\dynamic_array.h(154): warning C4715: “Dynamic_Array_find_Maximal”: 不是所有的控件路径都返回值
+  Simplex.vcxproj -> D:\Nutstore\myStudyMaterial\Grade_3_Term_2\#Operations_Research\Operations_Research_Report\#Code\03. Simplex\Debug\Simplex.exe

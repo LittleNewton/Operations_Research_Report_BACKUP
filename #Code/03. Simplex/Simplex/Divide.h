@@ -85,9 +85,9 @@ Div_Dynamic_Array *Div_Dynamic_Array_init(Dynamic_Array *a, Dynamic_Array *b) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
         return NULL;
     }
-    ans->A = (Div *)calloc(INIT_SIZE_DIV, sizeof(Div));
-    ans->capacity = INIT_SIZE_DIV;
-    ans->n = 0;
+    ans->A = (Div *)calloc(a->n, sizeof(Div));
+    ans->capacity = a->capacity * 2;
+    ans->n = a->n;
 
     if (a->n != b->n) {
         printf("length should be the same.");
@@ -152,15 +152,14 @@ void Div_Dynamic_Array_print(Div_Dynamic_Array *d) {
 
 int Div_Dynamic_Array_find_Minimal(Div_Dynamic_Array *a) {
     // 
-    Dynamic_Array *c = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
-    Dynamic_Array *d = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
-    c->A = (double *)calloc(a->n, sizeof(double));
-    if (c == NULL || d == NULL || c->A == NULL) {
+    Dynamic_Array *c = Dynamic_Array_init();
+    Dynamic_Array *d = Dynamic_Array_init();
+    int k = a->n;
+    if (c == NULL || d == NULL) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
         return NULL;
     }
     c->capacity = a->n;
-    c->n = 0;
 
     int i = 0;
     for (i = 0; i < a->n; i++) {
@@ -189,7 +188,5 @@ int Div_Dynamic_Array_find_Minimal(Div_Dynamic_Array *a) {
         printf("Sorry, no minimal value.\n");
         return NULL;
     }
-    //printf("Minimal Value is %2.0f , position is ", pivot);
-    //Dynamic_Array_print_int(tmp->n, tmp);
     return int(*(tmp->A));
 }

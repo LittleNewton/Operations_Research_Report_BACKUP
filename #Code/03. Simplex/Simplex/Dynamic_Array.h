@@ -32,9 +32,12 @@ Dynamic_Array *Dynamic_Array_init(void) {
         return NULL;
     }
 
-    ans->A = (double *)calloc(INIT_SIZE, sizeof(double));
+    double *tmp = (double *)calloc(8, sizeof(double));
+    ans->A = tmp;
     ans->capacity = INIT_SIZE;
     ans->n = 0;
+    free(tmp);
+    tmp = NULL;
     return ans;
 }
 

@@ -38,39 +38,20 @@ This demo shows a user interface for this CLI based program.
 int main(int argc, char *argv[]) {
 
     int i = 0;
-    char A[] = "(-3,-5,0,0,0;1,0,1,0,0;0,2,0,1,0;3,2,0,0,1)";
+    char c[] = "(3,5,0,0,0)";
+    char A[] = "(1,0,1,0,0;0,2,0,1,0;3,2,0,0,1)";
     // The objective functions has been add to row[0].
-    char b[] = "(10,4,12,8,56,78,-10)";
+    char b[] = "(4,12,18)";
     char basic_var[] = "(3,4,5)";
     char Non_basic_var[] = "(1,2)";
 
     printf("%s\n", b);
+    Dynamic_Array *try_1 = Dynamic_Array_init();
+    Dynamic_Array *try_2 = Dynamic_Array_init();
+    Dynamic_Array *try_3 = Dynamic_Array_init();
 
-    Dynamic_Array *da = get_Dynamic_Array(b);
-    Dynamic_Array_print(da);
-
-    //Dynamic_Array *ddd = Dynamic_Array_init_nonempty(b);
-    //Matrix_print(get_Matrix(b));
-
-    //int jj = Dynamic_Array_find_Maximal(ddd, get_Matrix(b)->n_column);
-    //printf("%d\t, %8.4f\n", jj, Dynamic_Array_get_Element(ddd, jj));
-
-    //Matrix *test = get_Matrix(A);
-    //double *Basic_var = get_Vector(basic_var);
-
-    //printf("---------ooooooooooooooooooooo-----\n");
-    //Dynamic_Array *ccc = Dynamic_Array_init();
-    //ccc = Matrix_column_to_Vector(test, 1);
-    //Dynamic_Array_print(3,ccc);
-    //printf("---------ooooooooooooooooooooo-----\n");
-
-    //Matrix_print(test);
-
-    //Matrix *d = Matrix_init(3, 3);
-    //Matrix_print(d);
-    //Matrix_print(d);
-
-    //free(test);
+    Simplex_Tableau *S = Simplex_Tableau_init(c, A, b, basic_var, Non_basic_var);
+    Simplex_trans(S);
 
     system("pause");
     return 0;
