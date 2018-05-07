@@ -36,8 +36,6 @@ Dynamic_Array *Dynamic_Array_init(void) {
     ans->A = tmp;
     ans->capacity = INIT_SIZE;
     ans->n = 0;
-    free(tmp);
-    tmp = NULL;
     return ans;
 }
 

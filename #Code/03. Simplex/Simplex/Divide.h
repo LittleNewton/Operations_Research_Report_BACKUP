@@ -86,8 +86,8 @@ Div_Dynamic_Array *Div_Dynamic_Array_init(Dynamic_Array *a, Dynamic_Array *b) {
         return NULL;
     }
     ans->A = (Div *)calloc(a->n, sizeof(Div));
-    ans->capacity = a->capacity * 2;
-    ans->n = a->n;
+    ans->capacity = a->n;
+    ans->n = 0;
 
     if (a->n != b->n) {
         printf("length should be the same.");

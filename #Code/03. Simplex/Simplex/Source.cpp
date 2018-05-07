@@ -46,11 +46,9 @@ int main(int argc, char *argv[]) {
     char Non_basic_var[] = "(1,2)";
 
     printf("%s\n", b);
-    Dynamic_Array *try_1 = Dynamic_Array_init();
-    Dynamic_Array *try_2 = Dynamic_Array_init();
-    Dynamic_Array *try_3 = Dynamic_Array_init();
 
     Simplex_Tableau *S = Simplex_Tableau_init(c, A, b, basic_var, Non_basic_var);
+
     Simplex_trans(S);
 
     system("pause");
