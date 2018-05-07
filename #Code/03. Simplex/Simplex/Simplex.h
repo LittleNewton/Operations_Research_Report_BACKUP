@@ -51,17 +51,23 @@ void Simplex_trans(Simplex_Tableau *S) {
     // Iterations for simplex method.
     Dynamic_Array *object = S->Objective_Vector;
 
-    int max_location = Dynamic_Array_find_Maximal(object);
-    double max = Dynamic_Array_get_Element(object, max_location);
+    int N_pivot_column = Dynamic_Array_find_Maximal(object);
+    double max = Dynamic_Array_get_Element(object, N_pivot_column);
 
-    Dynamic_Array *pivot_column = Matrix_column_to_Vector(S->Simplex_Coefficent_Matrix, max_location);
+    Dynamic_Array *pivot_column = Matrix_column_to_Vector(S->Simplex_Coefficent_Matrix, N_pivot_column);
 
     Div_Dynamic_Array *tmp = Div_Dynamic_Array_init(S->b, pivot_column);
 
-    Div_Dynamic_Array_find_Minimal(tmp);
+    int N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
 
-    printf("%d\t", tmp);
-    while (max > 0) {
-        
-    }
+    printf("%d\n", N_pivot_row);
+    
+    Matrix_pivot_Element_Trans(S->Simplex_Coefficent_Matrix, N_pivot_column, N_pivot_column);
+    Matrix_print(S->Simplex_Coefficent_Matrix);
+    int a;
+    // 这里有个很重要的问题，那就是矩阵运算应该带着b列进行，否则就全乱了。
+    // 建议写一个初始化main的参数的小函数，b用来判断，但是不难。
+    // 分着输入很好，方便观察，所以就不要改了。
+    // 但是simplex.h里面，各种object，b之类的要从单纯形状表里面提取出dynamic array，方便调用函数。
+    // 已有函数都没有功能性问题了。yes!!!
 }
