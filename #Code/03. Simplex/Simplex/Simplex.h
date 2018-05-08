@@ -67,9 +67,51 @@ Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b, char *Basic_var
     return ans;
 }
 
-void Simplex_trans(Simplex_Tableau *S) {
+Simplex_Tableau *Simplex_Tableau_re_init(Simplex_Tableau *S, char *c2) {
+    // c2 is needed in the second phase.
+    // The Objective Vector need to be changed
+    
+    int i = 1;
+    for (; i <= S->Objective_Vector->n; i++) {
+        double tmp = Dynamic_Array_get_Element(S->Objective_Vector, i);
+        if (tmp > 1e-15 || tmp < -1e-15) {
+            Matrix_column_to_zero(S->Matrix, i);
+        }
+    }
+
+    Dynamic_Array *New_Objective_Vector = get_Dynamic_Array(c2);
+    S->Objective_Vector = New_Objective_Vector;
+
+    for (i = 0; i < New_Objective_Vector->n; i++) {
+        // Cover the old value
+        *(S->Matrix->low_level_array + i) = Dynamic_Array_get_Element(New_Objective_Vector, i + 1);
+    }
+    Matrix_num_mul_vector(-1, S->Matrix, 1);
+
+    return S;
+}
+
+void Simplex(Simplex_Tableau *S) {
     // Iterations for simplex method.
-    Dynamic_Array *object = S->Objective_Vector;
+
+    int i = 1;
+    int count_minus = 0;
+    for (; i <= S->Objective_Vector->n; i++) {
+        double tmp = Dynamic_Array_get_Element(S->Objective_Vector, i);
+        if (tmp < 1e-15 || tmp == 0) {
+            count_minus += 1;
+        }
+    }
+    if (count_minus == S->Objective_Vector->n) {
+        printf("This Linear Programming MAYBE a <MIN> type\n");
+        for (i = 1; i <= S->Objective_Vector->n; i++) {
+            if (Dynamic_Array_get_Element(S->Objective_Vector, i) != 0) {
+                Matrix_pivot_Element_transInto_zero(S->Matrix, 1, i);
+            }
+        }
+    }
+
+    Dynamic_Array *object = Matrix_row_to_Vector(S->Matrix, 1, -1);
     int N_pivot_column = Dynamic_Array_find_Maximal(object);
     double Max = Dynamic_Array_get_Element(object, N_pivot_column);
 
@@ -83,7 +125,9 @@ void Simplex_trans(Simplex_Tableau *S) {
 
     Matrix_print(S->Matrix);        // like a Excel format
 
-    while (Max > 0) {
+    int iter_deepth = 0;
+
+    while (Max > 0 && iter_deepth <=10000) {
         object = Matrix_row_to_Vector(S->Matrix, 1, -1);
         N_pivot_column = Dynamic_Array_find_Maximal(object);
         Max = Dynamic_Array_get_Element(object, N_pivot_column);
@@ -96,5 +140,31 @@ void Simplex_trans(Simplex_Tableau *S) {
 
         Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
         Matrix_print(S->Matrix);
+
+        iter_deepth += 1;
     }
+}
+
+void dual_Simplex(Simplex_Tableau *S, char *c2) {
+    // For finding a initial solution, dual simplex method is needed.
+    // The input may be a little bit complex.
+
+    // First Phase
+
+    Matrix_print(S->Matrix);
+    S->Objective_Vector = Matrix_row_to_Vector(S->Matrix, 1, -1);
+    Simplex(S);
+    Matrix_print(S->Matrix);
+    if (Matrix_get_Element(S->Matrix, 1, S->Matrix->n_column) > 1e-14) {
+        printf("ANSWER of PHRASE ONE: %8.4f\n", Matrix_get_Element(S->Matrix, 1, S->Matrix->n_column));
+        printf("No Feasible Solution.\n");
+        return;
+    }
+    // else
+
+    printf("NO1 complete!\n");
+    Simplex_Tableau_re_init(S, c2);
+    Matrix_print(S->Matrix);        // like a Excel format
+    Dynamic_Array_print(S->Objective_Vector);
+    Simplex(S);
 }

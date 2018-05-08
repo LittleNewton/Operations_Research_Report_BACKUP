@@ -38,18 +38,21 @@ This demo shows a user interface for this CLI based program.
 int main(int argc, char *argv[]) {
 
     int i = 0;
-    char c[] = "(3,5,0,0,0)";
-    char A[] = "(1,0,1,0,0;0,2,0,1,0;3,2,0,0,1)";
-    // The objective functions has been add to row[0].
-    char b[] = "(4,12,18)";
-    char basic_var[] = "(3,4,5)";
-    char Non_basic_var[] = "(1,2)";
+    char c1[] = "(0, 0, 0, -1, 0, -1)";
+    char c2[] = "(-0.4, -0.5, 0, 0, 0, 0)";
+    char A[] = "(0.3,0.1,1,0,0,0;0.5,0.5,0,1,0,0;0.6,0.4,0,0,-1,1)";
+    // The objective functions has not been add to row[0].
+    char b[] = "(2.7, 6, 6)";
+    char basic_var[] = "(1, 2, 3)";
+    char Non_basic_var[] = "(4, 5, 6)";
 
     printf("%s\n", b);
 
-    Simplex_Tableau *S = Simplex_Tableau_init(c, A, b, basic_var, Non_basic_var);
+    Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b, basic_var, Non_basic_var);
 
-    Simplex_trans(S);
+    dual_Simplex(S, c2);
+
+    Matrix_print(S->Matrix);        // like a Excel format
 
     system("pause");
     return 0;

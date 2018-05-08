@@ -79,6 +79,24 @@ void Matrix_num_mul_vector(double N, Matrix *Dest, int n_row) {
     }
 }
 
+void Matrix_print(Matrix *matrix) {
+    // print this Matrix formatly
+    if (matrix == NULL) {
+        printf("Null Matrix.\n");
+        return;
+    }
+
+    int i;
+    int j;
+    for (i = 0; i < matrix->n_row; i++) {
+        for (j = 0; j < matrix->n_column; j++) {
+            printf("%8.4f\t", Matrix_get_Element(matrix, i + 1, j + 1));
+        }
+        printf("\n");
+    }
+    printf("------------------------------------------------------------------------------------------------------------------------\n");
+}
+
 void Matrix_row_add_row(Matrix *m, int DestRow, int SrcRow) {
     // Modify the old matrix.
     // This means target-row add source-row in Matrix m.
@@ -115,6 +133,27 @@ void Matrix_pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
     Matrix_num_mul_vector(1 / pivot, m, pivot_row);
 }
 
+void Matrix_pivot_Element_transInto_zero(Matrix *m, int pivot_row, int pivot_column) {
+    // Make the element in position [pivot_row, pivot_column] zero.
+    int i = 1;
+    double pivot = Matrix_get_Element(m, pivot_row, pivot_column);
+    for (; i <= m->n_row; i++) {
+        double tmp = Matrix_get_Element(m, i, pivot_column);
+        if (tmp != 0 && i != pivot_row) {
+            // Strickly speaking ,tmp should be the bigest one. whatever, This still works.
+            Matrix_num_mul_vector(-1 / tmp * pivot, m, i);
+            Matrix_print(m);
+            Matrix_row_add_row(m, pivot_row, i);
+            Matrix_print(m);
+            Matrix_num_mul_vector(-1 / pivot * tmp, m, i);
+            Matrix_print(m);
+            return;
+        }
+
+    }
+}
+
+
 Dynamic_Array *Matrix_column_to_Vector(Matrix *m, int column_num) {
     int i = 1;
     Dynamic_Array *ans = Dynamic_Array_init();
@@ -129,26 +168,16 @@ Dynamic_Array *Matrix_row_to_Vector(Matrix *m, int row_num, double times) {
     int j = 1;
     Dynamic_Array *ans = Dynamic_Array_init();
 
-    for (; j <= m->n_column; j++) {
+    for (; j < m->n_column; j++) {
         Dynamic_Array_append(ans, times * Matrix_get_Element(m, row_num, j));
     }
     return ans;
 }
 
-void Matrix_print(Matrix *matrix) {
-    // print this Matrix formatly
-    if (matrix == NULL) {
-        printf("Null Matrix.\n");
-        return;
+void Matrix_column_to_zero(Matrix *m, int column_num) {
+    int i = 0;
+    for (; i < m->n_row; i++) {
+        *(m->low_level_array + i * m->n_column + column_num - 1) = 0;
     }
-
-    int i;
-    int j;
-    for (i = 0; i < matrix->n_row; i++) {
-        for (j = 0; j < matrix->n_column; j++) {
-            printf("%8.4f\t", Matrix_get_Element(matrix, i + 1, j + 1));
-        }
-        printf("\n");
-    }
-    printf("----------------------------------------\n");
+    Matrix_print(m);
 }

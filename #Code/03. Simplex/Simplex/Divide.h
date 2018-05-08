@@ -188,5 +188,5 @@ int Div_Dynamic_Array_find_Minimal(Div_Dynamic_Array *a) {
         printf("Sorry, no minimal value.\n");
         return NULL;
     }
-    return int(*(tmp->A));
+    return int(*(tmp->A));  // Selecting the first one is modest.
 }
