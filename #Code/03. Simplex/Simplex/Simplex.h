@@ -24,7 +24,7 @@
 typedef struct Simplex_Tableau {
     // Generally speaking, this data structure is not a table.
     // whatever, it works.
-    Matrix *Simplex_Coefficent_Matrix;
+    Matrix *Matrix;
     Dynamic_Array *Objective_Vector;
     Dynamic_Array *b;
     Dynamic_Array *Non_Basic_Var;     // decision variable
@@ -37,12 +37,32 @@ Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b, char *Basic_var
     // with all the slack variables has been added.
     Simplex_Tableau *ans = (Simplex_Tableau *)calloc(1, sizeof(Simplex_Tableau));
 
-    ans->Simplex_Coefficent_Matrix = get_Matrix(A);
+    Matrix *m = get_Matrix(A);
     ans->Objective_Vector = get_Dynamic_Array(c);
     ans->b = get_Dynamic_Array(b);
-
     ans->Basic_Var = get_Dynamic_Array(Basic_var);
     ans->Non_Basic_Var = get_Dynamic_Array(Non_Basic_var);
+
+    int i = 0;
+    int j = 0;
+    Dynamic_Array *tmp = Dynamic_Array_init();
+
+    // STEP 1: Append the zero'th row.
+    for (i = 1; i <= ans->Objective_Vector->n; i++) {
+        Dynamic_Array_append(tmp, -1 * Dynamic_Array_get_Element(ans->Objective_Vector, i));
+    }
+    Dynamic_Array_append(tmp, 0);
+
+    // STEP 2: Append the Coefficient Matrix.
+    for (i = 1; i <= m->n_row; i++) {
+        for (j = 1; j <= m->n_column; j++) {
+            Dynamic_Array_append(tmp, Matrix_get_Element(m, i, j));
+        }
+        Dynamic_Array_append(tmp, Dynamic_Array_get_Element(ans->b, i));
+    }
+
+    ans->Matrix = Matrix_init(m->n_row + 1, m->n_column + 1);
+    ans->Matrix->low_level_array = tmp->A;
 
     return ans;
 }
@@ -50,24 +70,31 @@ Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b, char *Basic_var
 void Simplex_trans(Simplex_Tableau *S) {
     // Iterations for simplex method.
     Dynamic_Array *object = S->Objective_Vector;
-
     int N_pivot_column = Dynamic_Array_find_Maximal(object);
-    double max = Dynamic_Array_get_Element(object, N_pivot_column);
+    double Max = Dynamic_Array_get_Element(object, N_pivot_column);
 
-    Dynamic_Array *pivot_column = Matrix_column_to_Vector(S->Simplex_Coefficent_Matrix, N_pivot_column);
-
-    Div_Dynamic_Array *tmp = Div_Dynamic_Array_init(S->b, pivot_column);
-
-    int N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
-
-    printf("%d\n", N_pivot_row);
+    Dynamic_Array *pivot_column = Matrix_column_to_Vector(S->Matrix, N_pivot_column);
+    Dynamic_Array *last_column = Matrix_column_to_Vector(S->Matrix, S->Matrix->n_column);
     
-    Matrix_pivot_Element_Trans(S->Simplex_Coefficent_Matrix, N_pivot_column, N_pivot_column);
-    Matrix_print(S->Simplex_Coefficent_Matrix);
-    int a;
-    // 这里有个很重要的问题，那就是矩阵运算应该带着b列进行，否则就全乱了。
-    // 建议写一个初始化main的参数的小函数，b用来判断，但是不难。
-    // 分着输入很好，方便观察，所以就不要改了。
-    // 但是simplex.h里面，各种object，b之类的要从单纯形状表里面提取出dynamic array，方便调用函数。
-    // 已有函数都没有功能性问题了。yes!!!
+    Div_Dynamic_Array *tmp = Div_Dynamic_Array_init(last_column, pivot_column);
+    int N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
+    
+    Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
+
+    Matrix_print(S->Matrix);        // like a Excel format
+
+    while (Max > 0) {
+        object = Matrix_row_to_Vector(S->Matrix, 1, -1);
+        N_pivot_column = Dynamic_Array_find_Maximal(object);
+        Max = Dynamic_Array_get_Element(object, N_pivot_column);
+
+        pivot_column = Matrix_column_to_Vector(S->Matrix, N_pivot_column);
+        last_column = Matrix_column_to_Vector(S->Matrix, S->Matrix->n_column);
+
+        tmp = Div_Dynamic_Array_init(last_column, pivot_column);
+        N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
+
+        Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
+        Matrix_print(S->Matrix);
+    }
 }

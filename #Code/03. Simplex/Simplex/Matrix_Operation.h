@@ -120,8 +120,17 @@ Dynamic_Array *Matrix_column_to_Vector(Matrix *m, int column_num) {
     Dynamic_Array *ans = Dynamic_Array_init();
 
     for (; i <= m->n_row; i++) {
-        //double tmp = Matrix_get_Element(m, i, column_num);
         Dynamic_Array_append(ans, Matrix_get_Element(m, i, column_num));
+    }
+    return ans;
+}
+
+Dynamic_Array *Matrix_row_to_Vector(Matrix *m, int row_num, double times) {
+    int j = 1;
+    Dynamic_Array *ans = Dynamic_Array_init();
+
+    for (; j <= m->n_column; j++) {
+        Dynamic_Array_append(ans, times * Matrix_get_Element(m, row_num, j));
     }
     return ans;
 }
