@@ -27,11 +27,9 @@ typedef struct Simplex_Tableau {
     Matrix *Matrix;
     Dynamic_Array *Objective_Vector;
     Dynamic_Array *b;
-    Dynamic_Array *Non_Basic_Var;     // decision variable
-    Dynamic_Array *Basic_Var;         // 
 } Simplex_Talbeau;
 
-Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b, char *Basic_var, char *Non_Basic_var) {
+Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b) {
     // Initialize the table of simplex method.
     // This is a simple implementation, only can solve problems like "Ax = b"
     // with all the slack variables has been added.
@@ -40,8 +38,6 @@ Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b, char *Basic_var
     Matrix *m = get_Matrix(A);
     ans->Objective_Vector = get_Dynamic_Array(c);
     ans->b = get_Dynamic_Array(b);
-    ans->Basic_Var = get_Dynamic_Array(Basic_var);
-    ans->Non_Basic_Var = get_Dynamic_Array(Non_Basic_var);
 
     int i = 0;
     int j = 0;

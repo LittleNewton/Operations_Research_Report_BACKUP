@@ -43,12 +43,8 @@ int main(int argc, char *argv[]) {
     char A[] = "(0.3,0.1,1,0,0,0;0.5,0.5,0,1,0,0;0.6,0.4,0,0,-1,1)";
     // The objective functions has not been add to row[0].
     char b[] = "(2.7, 6, 6)";
-    char basic_var[] = "(1, 2, 3)";
-    char Non_basic_var[] = "(4, 5, 6)";
 
-    printf("%s\n", b);
-
-    Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b, basic_var, Non_basic_var);
+    Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
 
     dual_Simplex(S, c2);
 

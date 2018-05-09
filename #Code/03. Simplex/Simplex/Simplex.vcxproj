@@ -123,6 +123,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ASCII_Table.h" />
     <ClInclude Include="Divide.h" />
     <ClInclude Include="Matrix_Operation.h" />
     <ClInclude Include="Shell_Reader.h" />
