@@ -148,11 +148,8 @@ void Matrix_pivot_Element_transInto_zero(Matrix *m, int pivot_row, int pivot_col
         if (tmp != 0 && i != pivot_row) {
             // Strickly speaking ,tmp should be the bigest one. whatever, This still works.
             Matrix_num_mul_vector(-1 / tmp * pivot, m, i);
-            Matrix_print(m);
             Matrix_row_add_row(m, pivot_row, i);
-            Matrix_print(m);
             Matrix_num_mul_vector(-1 / pivot * tmp, m, i);
-            Matrix_print(m);
             return;
         }
 
@@ -185,5 +182,4 @@ void Matrix_column_to_zero(Matrix *m, int column_num) {
     for (; i < m->n_row; i++) {
         *(m->low_level_array + i * m->n_column + column_num - 1) = 0;
     }
-    Matrix_print(m);
 }

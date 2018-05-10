@@ -30,7 +30,7 @@
 
 * Table Name = strcpy("Table Name", No.)
 * double => char * => strlen(char *) => Number of elements in this row => each elements 
-
+* NUmber of rows should be unlimited.
 */
 
 #include <string.h>

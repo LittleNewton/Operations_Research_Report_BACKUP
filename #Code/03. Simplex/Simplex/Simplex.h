@@ -119,9 +119,7 @@ void Simplex(Simplex_Tableau *S) {
     
     Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
 
-    Matrix_print(S->Matrix);        // like a Excel format
-
-    int iter_deepth = 0;
+    int iter_deepth = 1;
 
     while (Max > 0 && iter_deepth <=10000) {
         object = Matrix_row_to_Vector(S->Matrix, 1, -1);
@@ -135,6 +133,7 @@ void Simplex(Simplex_Tableau *S) {
         N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
 
         Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
+		printf("Iter deepth: %d\n", iter_deepth);
         Matrix_print(S->Matrix);
 
         iter_deepth += 1;
@@ -146,11 +145,10 @@ void dual_Simplex(Simplex_Tableau *S, char *c2) {
     // The input may be a little bit complex.
 
     // First Phase
-
+	printf("The First Statement is\n");
     Matrix_print(S->Matrix);
     S->Objective_Vector = Matrix_row_to_Vector(S->Matrix, 1, -1);
     Simplex(S);
-    Matrix_print(S->Matrix);
     if (Matrix_get_Element(S->Matrix, 1, S->Matrix->n_column) > 1e-14) {
         printf("ANSWER of PHRASE ONE: %8.4f\n", Matrix_get_Element(S->Matrix, 1, S->Matrix->n_column));
         printf("No Feasible Solution.\n");
@@ -158,9 +156,10 @@ void dual_Simplex(Simplex_Tableau *S, char *c2) {
     }
     // else
 
-    printf("NO1 complete!\n");
+    printf("First Phase completed.\n\n");
     Simplex_Tableau_re_init(S, c2);
-    Matrix_print(S->Matrix);        // like a Excel format
+	printf("NEW Objective Function is ");
     Dynamic_Array_print(S->Objective_Vector);
+	printf("\n");
     Simplex(S);
 }

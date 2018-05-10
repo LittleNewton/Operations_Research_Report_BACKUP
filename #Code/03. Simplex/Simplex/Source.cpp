@@ -48,8 +48,6 @@ int main(int argc, char *argv[]) {
 
     dual_Simplex(S, c2);
 
-    Matrix_print(S->Matrix);        // like a Excel format
-
     system("pause");
     return 0;
 }
