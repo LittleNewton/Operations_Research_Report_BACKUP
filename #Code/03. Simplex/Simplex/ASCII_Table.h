@@ -29,8 +29,16 @@
 +----+-----------------+-------+
 
 * Table Name = strcpy("Table Name", No.)
-* double => char * => strlen(char *) => Number of elements in this row => each elements 
-* NUmber of rows should be unlimited.
+* double => char * => strlen(char *) => Number of elements in this row => each elements' length
+* Each row's number of elements.
+* The Number of elements in each row can be distinct, I need a row completation function.
+* 
+* (1) struct Node	{char *; its length}										Node in one row
+* (2) struct row	{Node *; Numbers}											Row in an table
+* (3) struct table	{row []; number of rows; char * table_Head; row header}		Main body
+* 
+* (1) SOMETIMES we need a strict table with no one element be NULL automatically. Checking function is needed.
+* (2) Number of rows should be unlimited.
 */
 
 #include <string.h>
