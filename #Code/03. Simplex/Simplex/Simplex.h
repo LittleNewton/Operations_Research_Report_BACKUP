@@ -89,6 +89,7 @@ Simplex_Tableau *Simplex_Tableau_re_init(Simplex_Tableau *S, char *c2) {
 
 void Simplex(Simplex_Tableau *S) {
     // Iterations for simplex method.
+    Matrix_print(S->Matrix);
 
     int i = 1;
     int count_minus = 0;
@@ -107,6 +108,8 @@ void Simplex(Simplex_Tableau *S) {
         }
     }
 
+    int iter_deepth = 1;
+
     Dynamic_Array *object = Matrix_row_to_Vector(S->Matrix, 1, -1);
     int N_pivot_column = Dynamic_Array_find_Maximal(object);
     double Max = Dynamic_Array_get_Element(object, N_pivot_column);
@@ -116,10 +119,11 @@ void Simplex(Simplex_Tableau *S) {
     
     Div_Dynamic_Array *tmp = Div_Dynamic_Array_init(last_column, pivot_column);
     int N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
-    
+
     Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
 
-    int iter_deepth = 1;
+    printf("Iter deepth: %d\n", iter_deepth++);
+    Matrix_print(S->Matrix);
 
     while (Max > 0 && iter_deepth <=10000) {
         object = Matrix_row_to_Vector(S->Matrix, 1, -1);
