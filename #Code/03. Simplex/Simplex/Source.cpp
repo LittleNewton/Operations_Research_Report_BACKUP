@@ -38,19 +38,29 @@ This demo shows a user interface for this CLI based program.
 
 int main(int argc, char *argv[]) {
 
-    int i = 0;
+    //if (argc != 5) {
+    //    printf("This function needs and only needs 4 arguments.\n");
+    //    return 0;
+    //}
+
+    //char *c1 = *(argv + 1);
+    //char *c2 = *(argv + 2);
+    //char  *A = *(argv + 3);
+    //char  *b = *(argv + 4);
+    //Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
+    //dual_Simplex(S, c2);
+
     char c1[] = "(0, 0, 0, -1, 0, -1)";
     char c2[] = "(-0.4, -0.5, 0, 0, 0, 0)";
     char  A[] = "(0.3,0.1,1,0,0,0;0.5,0.5,0,1,0,0;0.6,0.4,0,0,-1,1)";
     char  b[] = "(2.7, 6, 6)";
+    Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
+    dual_Simplex(S, c2);
 
     //char c1[] = "(3,5,0,0,0)";
     //char  A[] = "(1,0,1,0,0;0,2,0,1,0;3,2,0,0,1)";
     //char  b[] = "(4,12,18)";
-
-    Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
-
-    dual_Simplex(S, c2);
+    //Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
     //Simplex(S);
 
     system("pause");

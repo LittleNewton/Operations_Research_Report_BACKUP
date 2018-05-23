@@ -89,8 +89,11 @@ Simplex_Tableau *Simplex_Tableau_re_init(Simplex_Tableau *S, char *c2) {
 
 void Simplex(Simplex_Tableau *S) {
     // Iterations for simplex method.
+
+    // Pre-print the original Matrix.
     Matrix_print(S->Matrix);
 
+    // Checking the Problem type.
     int i = 1;
     int count_minus = 0;
     for (; i <= S->Objective_Vector->n; i++) {
@@ -101,9 +104,11 @@ void Simplex(Simplex_Tableau *S) {
     }
     if (count_minus == S->Objective_Vector->n) {
         printf("This Linear Programming MAYBE a <MIN> type\n");
+        printf("Simplex Matrix will be reshaped.\n");
         for (i = 1; i <= S->Objective_Vector->n; i++) {
             if (Dynamic_Array_get_Element(S->Objective_Vector, i) != 0) {
                 Matrix_pivot_Element_transInto_zero(S->Matrix, 1, i);
+                Matrix_print(S->Matrix);
             }
         }
     }
@@ -125,10 +130,11 @@ void Simplex(Simplex_Tableau *S) {
     printf("Iter deepth: %d\n", iter_deepth++);
     Matrix_print(S->Matrix);
 
+    object = Matrix_row_to_Vector(S->Matrix, 1, -1);
+    N_pivot_column = Dynamic_Array_find_Maximal(object);
+    Max = Dynamic_Array_get_Element(object, N_pivot_column);
+
     while (Max > 0 && iter_deepth <=10000) {
-        object = Matrix_row_to_Vector(S->Matrix, 1, -1);
-        N_pivot_column = Dynamic_Array_find_Maximal(object);
-        Max = Dynamic_Array_get_Element(object, N_pivot_column);
 
         pivot_column = Matrix_column_to_Vector(S->Matrix, N_pivot_column);
         last_column = Matrix_column_to_Vector(S->Matrix, S->Matrix->n_column);
@@ -137,8 +143,11 @@ void Simplex(Simplex_Tableau *S) {
         N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
 
         Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
-		printf("Iter deepth: %d\n", iter_deepth);
+        printf("Iter deepth: %d\n", iter_deepth);
         Matrix_print(S->Matrix);
+        object = Matrix_row_to_Vector(S->Matrix, 1, -1);
+        N_pivot_column = Dynamic_Array_find_Maximal(object);
+        Max = Dynamic_Array_get_Element(object, N_pivot_column);
 
         iter_deepth += 1;
     }
@@ -149,8 +158,6 @@ void dual_Simplex(Simplex_Tableau *S, char *c2) {
     // The input may be a little bit complex.
 
     // First Phase
-	printf("The First Statement is\n");
-    Matrix_print(S->Matrix);
     S->Objective_Vector = Matrix_row_to_Vector(S->Matrix, 1, -1);
     Simplex(S);
     if (Matrix_get_Element(S->Matrix, 1, S->Matrix->n_column) > 1e-14) {
