@@ -12,7 +12,7 @@
 
 /* We need to keep keys and values */
 typedef struct _hashmap_element {
-    char* key;
+    char *key;
     int in_use;
     any_t data;
 } hashmap_element;
@@ -29,10 +29,10 @@ typedef struct _hashmap_map {
 * Return an empty hashmap, or NULL on failure.
 */
 map_t hashmap_new() {
-    hashmap_map* m = (hashmap_map*)malloc(sizeof(hashmap_map));
+    hashmap_map* m = (hashmap_map *)malloc(sizeof(hashmap_map));
     if (!m) goto err;
 
-    m->data = (hashmap_element*)calloc(INITIAL_SIZE, sizeof(hashmap_element));
+    m->data = (hashmap_element *)calloc(INITIAL_SIZE, sizeof(hashmap_element));
     if (!m->data) goto err;
 
     m->table_size = INITIAL_SIZE;
@@ -202,7 +202,7 @@ int hashmap_hash(map_t in, char* key) {
     curr = hashmap_hash_int(m, key);
 
     /* Linear probing */
-    for (i = 0; i< MAX_CHAIN_LENGTH; i++) {
+    for (i = 0; i < MAX_CHAIN_LENGTH; i++) {
         if (m->data[curr].in_use == 0)
             return curr;
 
@@ -298,7 +298,7 @@ int hashmap_get(map_t in, char* key, any_t *arg) {
     curr = hashmap_hash_int(m, key);
 
     /* Linear probing, if necessary */
-    for (i = 0; i<MAX_CHAIN_LENGTH; i++) {
+    for (i = 0; i < MAX_CHAIN_LENGTH; i++) {
 
         int in_use = m->data[curr].in_use;
         if (in_use == 1) {
