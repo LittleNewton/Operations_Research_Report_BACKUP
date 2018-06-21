@@ -32,7 +32,7 @@
 
 typedef struct data_struct_s
 {
-    char key_string[KEY_MAX_LENGTH];
+    char key_string[KEY_MAX_LENGTH];	// This is a string pointer.
     int number;
 } data_struct_t;
 
@@ -47,8 +47,7 @@ int main(char* argv, int argc)
     mymap = hashmap_new();
 
     /* First, populate the hash map with ascending values */
-    for (index = 0; index < KEY_COUNT; index += 1)
-    {
+    for (index = 0; index < KEY_COUNT; index += 1) {
         /* Store the key string along side the numerical value so we can free it later */
         value = (data_struct_t *)malloc(sizeof(data_struct_t));
         snprintf(value->key_string, KEY_MAX_LENGTH, "%s%d", KEY_PREFIX, index);
@@ -58,10 +57,17 @@ int main(char* argv, int argc)
         assert(error == MAP_OK);
     }
 
+	char findX[] = "";
+	any_t *ans = 0;
+
+	printf("%d\n", hashmap_get(mymap, findX, ans));
+	printf("%s", *ans);
+	printf("\n\n--------------------\n");
+	return 0;
+
     /* Now, check all of the expected values are there */
-    for (index = 0; index<KEY_COUNT; index += 1)
-    {
-        snprintf(key_string, KEY_MAX_LENGTH, "%s%d", KEY_PREFIX, index);
+    for (index = 0; index < KEY_COUNT; index += 1){
+        snprintf(value->key_string, KEY_MAX_LENGTH, "%s%d", KEY_PREFIX, index);
 
         error = hashmap_get(mymap, key_string, (void**)(&value));
 
