@@ -1,25 +1,23 @@
-// filename: Source.cpp
-
 /*
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Apr 26 22 : 07 : 06 2018
-
-@author: Newton
-
-@email: littleNewton6@outlook.com
+* Copyright (c) 2018, Liu Peng, School of Mathematics and Statistics, YNU
+* Apache License.
+*
+* 文件名称：Source.cpp
+* 文件标识：见配置管理计划书
+* 摘 要：测试Prim算法
+*
+* 当前版本：1.0
+* 作 者：刘鹏，littleNewton6@outlook.com
+* 创建日期：Thu Apr 26 22 : 07 : 06 2018
+* 完成日期：2018年6月日
+*
+* 取代版本：0.9
+* 原作者 ：刘鹏
+* 完成日期：
 */
 
 /*
-EXAMPLE:
-Power Shell> Simplex "(-1,-1)" "(1,-2,1,1,0,0,0;-4,1,2,0,-1,1,0;-2,0,1,0,0,0,7)" "(11,3,1)"
-Power Shell> Optimal solution found.
-x = 3 * 1
-x1
-x2
-x3
-This demo shows a user interface for this CLI based program.
+* A unit test and example of how to use the dual-simplex method
 */
 
 #pragma once
