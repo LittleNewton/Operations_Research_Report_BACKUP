@@ -24,10 +24,17 @@
 
 #include <stdio.h>
 
-typedef struct Vertex{
-    // Lightweight vertex structure for a graph
-    // do not call constructor directly. Use Graph's insert_vertex(x)
-    double element;
+#include "HashMap.h"
 
-} Vertex;
+// Lightweight vertex structure for a graph
+// do not call constructor directly. Use Graph's insert_vertex(x)
+typedef void * Vertex;
+
+// Lightweight edge structure for a graph.
+// Do not call constructor directly. Use Graph's insert_edge(u, v, x)
+typedef struct _Edge {
+    Vertex origin;          // trans pointer
+    Vertex destination;     // trans pointer
+    void *element;          // arbitary datatype
+} Edge;
 

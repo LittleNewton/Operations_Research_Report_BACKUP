@@ -33,7 +33,7 @@
 
 typedef struct data_struct_s
 {
-    char key_string[KEY_MAX_LENGTH];    // This is a string pointer.
+    char key_string[KEY_MAX_LENGTH];        // This is a string pointer.
     int number;
 } data_struct_t;
 
@@ -41,6 +41,10 @@ int main(int argc, char *argv[]) {
     char name[] = "Liu Peng";
     int age = 22;
     map_t m = hashmap_new();
-
-
+    hashmap_put(m, name, &age);
+    int *out = 0;
+    hashmap_get(m, name, (void **)&out);    // 输入的必须是一个指向指针的指针。
+    printf("%d\n", *out);
+    system("pause");
+    return 0;
 }

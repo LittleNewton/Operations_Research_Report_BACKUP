@@ -6,6 +6,8 @@
 
 ## 1. API of HashMap
 
+此模块由开源者提供。具体参见代码中给出的email.
+
 ```C
 typedef struct _hashmap_element {
     char *key;                  // The key of the node

@@ -21,18 +21,18 @@
 #include "Matrix_Operation.h"
 #include "Divide.h"
 
+// Generally speaking, this data structure is not a table.
+// whatever, it works.
 typedef struct Simplex_Tableau {
-    // Generally speaking, this data structure is not a table.
-    // whatever, it works.
     Matrix *Matrix;
     Dynamic_Array *Objective_Vector;
     Dynamic_Array *b;
 } Simplex_Talbeau;
 
+// Initialize the table of simplex method.
+// This is a simple implementation, only can solve problems like "Ax = b"
+// with all the slack variables has been added.
 Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b) {
-    // Initialize the table of simplex method.
-    // This is a simple implementation, only can solve problems like "Ax = b"
-    // with all the slack variables has been added.
     Simplex_Tableau *ans = (Simplex_Tableau *)calloc(1, sizeof(Simplex_Tableau));
 
     Matrix *m = get_Matrix(A);
@@ -63,10 +63,9 @@ Simplex_Tableau *Simplex_Tableau_init(char *c, char *A, char *b) {
     return ans;
 }
 
+// c2 is needed in the second phase.
+// The Objective Vector need to be changed. reshape the matrix.
 Simplex_Tableau *Simplex_Tableau_re_init(Simplex_Tableau *S, char *c2) {
-    // c2 is needed in the second phase.
-    // The Objective Vector need to be changed
-    
     int i = 1;
     for (; i <= S->Objective_Vector->n; i++) {
         double tmp = Dynamic_Array_get_Element(S->Objective_Vector, i);
@@ -87,8 +86,8 @@ Simplex_Tableau *Simplex_Tableau_re_init(Simplex_Tableau *S, char *c2) {
     return S;
 }
 
+// Iterations for simplex method.
 void Simplex(Simplex_Tableau *S) {
-    // Iterations for simplex method.
 
     // Pre-print the original Matrix.
     Matrix_print(S->Matrix);
@@ -153,9 +152,9 @@ void Simplex(Simplex_Tableau *S) {
     }
 }
 
+// For finding a initial solution, dual simplex method is needed.
+// The input may be a little bit complex.
 void dual_Simplex(Simplex_Tableau *S, char *c2) {
-    // For finding a initial solution, dual simplex method is needed.
-    // The input may be a little bit complex.
 
     // First Phase
     S->Objective_Vector = Matrix_row_to_Vector(S->Matrix, 1, -1);

@@ -22,17 +22,17 @@
 #include "Dynamic_Array.h"
 #include "Divide.h"
 
+// This is a container for creating a stack data structure.
 typedef struct char_LinkedList {
-    // This is a container for creating a stack data structure.
     char_LinkedList *head;
     char elements;
     int times;
     char_LinkedList *next;
 } char_LinkedList;
 
+// Used to modify the string get from the keyboard.
+// Get rid of the spaces and other "(", ")".
 char *clean(char *string) {
-    // Used to modify the string get from the keyboard.
-    // Get rid of the spaces and other "(", ")".
     char *head = string;
 
     int count_space = 0;
@@ -86,9 +86,9 @@ char *clean(char *string) {
     }
 }
 
+// Cut a part of the string containing the vector or matrix.
+// This function is created for supporting the get_Number funciton.
 char *cut(char *string) {
-    // Cut a part of the string containing the vector or matrix.
-    // This function is created for supporting the get_Number funciton.
     while (*string != ',' && *string != ';') {
         if (*string == '\0') {
             return '\0';
@@ -98,8 +98,8 @@ char *cut(char *string) {
     return ++string;
 }
 
+// Need a string has been cleand.
 double get_Number(char *string) {
-    // Need a string has been cleand.
     if (*string == '\0') {
         return 0;
     }
@@ -127,11 +127,11 @@ double get_Number(char *string) {
             work->elements = NULL;
             work->times = NULL;
             string++;
-            i++;        // i在后面还有用
+            i++;        // i will be used later
         }
 
         work->elements = *string;       // "," and ";" should be added, too.
-        work->times = NULL;             // 逗号的指数不能为有意义的
+        work->times = NULL;             // index of comma is meaningful
 
         string++;
         // string will be used in the next get number step but won't be used later.
@@ -184,8 +184,8 @@ double get_Number(char *string) {
     return ans;
 }
 
+// Input a string, output a vector consists of double elements.
 double *get_Vector(char *string) {
-    // Input a string, output a vector consists of double elements.
     char *src = clean(string);
     char *src_head = src;
     int i = 0;
@@ -210,8 +210,8 @@ double *get_Vector(char *string) {
     return ans;
 }
 
+// Input a string, output its length of the vector consists of double elements.
 int get_vector_Length(char *string) {
-    // Input a string, output its length of the vector consists of double elements.
     char *src = clean(string);
     char *src_head = src;
     int i = 0;
@@ -225,8 +225,8 @@ int get_vector_Length(char *string) {
     return count_comma;
 }
 
+// Input a string, output a vector consists of double elements.
 int *get_INT_vector(char *string) {
-    // Input a string, output a vector consists of double elements.
     char *src = clean(string);
     char *src_head = src;
     int i = 0;
@@ -251,8 +251,8 @@ int *get_INT_vector(char *string) {
     return ans;
 }
 
+// Another constuctor. take care.
 Matrix *get_Matrix(char *string) {
-    // Another constuctor. take care.
     Matrix *ans = (Matrix *)calloc(1, sizeof(Matrix));
     if (ans == NULL) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
@@ -284,6 +284,7 @@ Matrix *get_Matrix(char *string) {
 }
 
 Dynamic_Array *get_Dynamic_Array(char *string) {
+    // get a dynamic array from keyboard input.
     Dynamic_Array *ans = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
     if (ans == NULL) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");

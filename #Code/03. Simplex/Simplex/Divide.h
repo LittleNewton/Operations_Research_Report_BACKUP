@@ -27,21 +27,22 @@
 #define NORMAL              "Normal"
 #define INIT_SIZE_DIV       8
 
+// This is a new division supporting structure.
+// If up/down can be done, value will maintain this value.
+// If down is equal to zero, obviously this cannot be done,
+// state will maintain its state ad "NaN", which means the 
+// answer is Not a Number.
 typedef struct Div {
-    // This is a new division supporting structure.
-    // If up/down can be done, value will maintain this value.
-    // If down is equal to zero, obviously this cannot be done,
-    // state will maintain its state ad "NaN", which means the 
-    // answer is Not a Number.
     double up;
     double down;
     double value;
     char state[10];
 } Div;
 
+// In order to maintain this data structure, I have to write 
+// this container. It is too bad.
 typedef struct Div_Dynamic_Array {
-    // In order to maintain this data structure, I have to write 
-    // this container. It is too bad.
+
     Div *A;
     int capacity;
     int n;
@@ -67,6 +68,7 @@ void Div_Dynamic_Array_resize(Div_Dynamic_Array *D) {
     D->capacity *= 2;
 }
 
+// Add a new element to this array.
 void Div_Dynamic_Array_append(Div_Dynamic_Array *D, Div e) {
     if (D->n == D->capacity) {
         Div_Dynamic_Array_resize(D);
@@ -78,8 +80,8 @@ void Div_Dynamic_Array_append(Div_Dynamic_Array *D, Div e) {
     D->n += 1;
 }
 
+// Generate a new empty div dynamic array.
 Div_Dynamic_Array *Div_Dynamic_Array_init(Dynamic_Array *a, Dynamic_Array *b) {
-    // Generate a new empty div dynamic array.
     Div_Dynamic_Array *ans = (Div_Dynamic_Array *)calloc(1, sizeof(Div_Dynamic_Array));
     if (ans == NULL) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
@@ -150,8 +152,8 @@ void Div_Dynamic_Array_print(Div_Dynamic_Array *d) {
     printf(")\n");
 }
 
+// find the minimal value in this array and return its location.
 int Div_Dynamic_Array_find_Minimal(Div_Dynamic_Array *a) {
-    // 
     Dynamic_Array *c = Dynamic_Array_init();
     Dynamic_Array *d = Dynamic_Array_init();
     int k = a->n;

@@ -18,17 +18,17 @@
 
 #include "Dynamic_Array.h"
 
+// The INDEX begin with 1 rather 0 is reasonable.
+// TRY make this program behave like MATLAB linprog.
 typedef struct Matrix {
-    // The INDEX begin with 1 rather 0 is reasonable.
-    // TRY make this program behave like MATLAB linprog.
     double *low_level_array;
     int n_row;
     int n_column;
 }Matrix;
 
+// This is a constructor for Matrix data type.
+// Matrix_init should be the only one constrctor of class Matrix.
 Matrix *Matrix_init(int n_row, int n_column) {
-    // This is a constructor for Matrix data type.
-    // Matrix_init should be the only one constrctor of class Matrix.
     if (n_row == 0 || n_column == 0) {
         printf("Can't generate Matrix.\n");
         return NULL;
@@ -52,8 +52,8 @@ Matrix *Matrix_init(int n_row, int n_column) {
     return ans;
 }
 
+// Generate a deep copy of Matrix mSource.
 Matrix *Matrix_copy(const Matrix *mSrc) {
-    // Generate a deep copy of Matrix mSource.
     Matrix *mDest = Matrix_init(mSrc->n_row, mSrc->n_column);
     int i = 0;
     int j = 0;
@@ -70,17 +70,17 @@ double Matrix_get_Element(const Matrix *mSrc, int i, int j) {
     return *(mSrc->low_level_array + (i - 1) * mSrc->n_column + (j - 1));
 }
 
+// Modify the old matrix.
+// This means N multiply the nth row of Matrix matrix.
 void Matrix_num_mul_vector(double N, Matrix *Dest, int n_row) {
-    // Modify the old matrix.
-    // This means N multiply the nth row of Matrix matrix.
     int i;
     for (i = 0; i < Dest->n_column; i++) {
         *(Dest->low_level_array + (n_row - 1) * Dest->n_column + i) *= N;
     }
 }
 
+// print this Matrix formatly
 void Matrix_print(Matrix *matrix) {
-    // print this Matrix formatly
     if (matrix == NULL) {
         printf("Null Matrix.\n");
         return;
@@ -103,9 +103,9 @@ void Matrix_print(Matrix *matrix) {
     printf("+---------------------------------------------------------------------------------------------------------------+\n\n\n");
 }
 
+// Modify the old matrix.
+// This means target-row add source-row in Matrix m.
 void Matrix_row_add_row(Matrix *m, int DestRow, int SrcRow) {
-    // Modify the old matrix.
-    // This means target-row add source-row in Matrix m.
     int i;
     for (i = 0; i < m->n_column; i++) {
         *(m->low_level_array + (DestRow - 1) * m->n_column + i) += \
@@ -113,10 +113,10 @@ void Matrix_row_add_row(Matrix *m, int DestRow, int SrcRow) {
     }
 }
 
+// Modify the old matrix, it won't need to generate a new one.
+// It means the pivot element trans into 1 and the other elements in the same column
+// trans into zero. Value checking is needed in this function.
 void Matrix_pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
-    // Modify the old matrix, it won't need to generate a new one.
-    // It means the pivot element trans into 1 and the other elements in the same column
-    // trans into zero. Value checking is needed in this function.
     double pivot = Matrix_get_Element(m, pivot_row, pivot_column);
 
     // Value Checking
@@ -139,8 +139,8 @@ void Matrix_pivot_Element_Trans(Matrix *m, int pivot_row, int pivot_column) {
     Matrix_num_mul_vector(1 / pivot, m, pivot_row);
 }
 
+// Make the element in position [pivot_row, pivot_column] zero.
 void Matrix_pivot_Element_transInto_zero(Matrix *m, int pivot_row, int pivot_column) {
-    // Make the element in position [pivot_row, pivot_column] zero.
     int i = 1;
     double pivot = Matrix_get_Element(m, pivot_row, pivot_column);
     for (; i <= m->n_row; i++) {
