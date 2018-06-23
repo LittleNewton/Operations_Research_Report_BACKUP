@@ -48,7 +48,7 @@ API
 - hashmap_rehash        :加倍哈希表的容量
 - hashmap_put           :往哈希表里放一个node
 - hashmap_get           :从哈希表里取一个value出来，这里的value采取的是赋值式（或许这并不是一个很好的实现方式，但是很管用）
-- hashmap_iterate       :????????????????
+- hashmap_iterate       :目前还不太清楚有什么用途。
 - hashmap_remove        :移除一个键值对
 - hashmap_free          :释放内存
 - hashmap_length        :获得哈希表的已经使用的长度
