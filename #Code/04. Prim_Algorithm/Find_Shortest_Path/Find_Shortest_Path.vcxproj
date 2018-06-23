@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HashMap.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>

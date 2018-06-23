@@ -12,10 +12,10 @@
 #ifndef __HASHMAP_H__
 #define __HASHMAP_H__
 
-#define MAP_MISSING     -3      /* No such element */
-#define MAP_FULL        -2      /* Hashmap is full */
-#define MAP_OMEM        -1      /* Out of Memory */
-#define MAP_OK           0      /* OK */
+#define MAP_MISSING     -3      // No such element
+#define MAP_FULL        -2      // Hashmap is full
+#define MAP_OMEM        -1      // Out of Memory
+#define MAP_OK           0      // OK
 
 
 // any_t is a pointer.  This allows you to put arbitrary structures in
@@ -24,7 +24,7 @@ typedef void *any_t;
 
 // PFany is a pointer to a function that can take two any_t arguments
 // and return an integer. Returns status code..
-typedef int(* PFany)(any_t, any_t);
+typedef int (* PFany)(any_t, any_t);
 
 // map_t is a pointer to an internally maintained data structure.
 // Clients of this package do not need to know how hashmaps are
