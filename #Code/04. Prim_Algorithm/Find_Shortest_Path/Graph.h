@@ -2,22 +2,18 @@
 * Copyright (c) 2018, Liu Peng, School of Mathematics and Statistics, YNU
 * Apache License.
 *
-* ÎÄ¼şÃû³Æ£ºGraph.h
-* ÎÄ¼ş±êÊ¶£º¼ûÅäÖÃ¹ÜÀí¼Æ»®Êé
-* Õª Òª£ºGraphµÄ¾ßÌåÊµÏÖ
+* æ–‡ä»¶åç§°ï¼šGraph.h
+* æ–‡ä»¶æ ‡è¯†ï¼šè§é…ç½®ç®¡ç†è®¡åˆ’ä¹¦
+* æ‘˜ è¦ï¼šGraphçš„å…·ä½“å®ç°
 *
-* µ±Ç°°æ±¾£º1.0
-* ×÷ Õß£ºÁõÅô£¬littleNewton6@outlook.com
-* ´´½¨ÈÕÆÚ£º2018Äê6ÔÂ20ÈÕ
-* Íê³ÉÈÕÆÚ£º2018Äê6ÔÂÈÕ
+* å½“å‰ç‰ˆæœ¬ï¼š1.0
+* ä½œ è€…ï¼šåˆ˜é¹ï¼ŒlittleNewton6@outlook.com
+* åˆ›å»ºæ—¥æœŸï¼š2018å¹´6æœˆ20æ—¥
+* å®Œæˆæ—¥æœŸï¼š2018å¹´6æœˆæ—¥
 *
-* È¡´ú°æ±¾£º0.9
-* Ô­×÷Õß £ºÁõÅô
-* Íê³ÉÈÕÆÚ£º
-*/
-
-/*
-* 
+* å–ä»£ç‰ˆæœ¬ï¼š0.9
+* åŸä½œè€… ï¼šåˆ˜é¹
+* å®Œæˆæ—¥æœŸï¼š
 */
 
 #pragma once
@@ -26,6 +22,7 @@
 #include <stdio.h>
 
 #include "HashMap.h"
+#include "Dynamic_Array.h"
 
 
 #ifndef __GRAPH_H_
@@ -118,7 +115,7 @@ bool Graph_is_directed(Graph *g) {
 // Insert and return a new Vertex with element x.
 void Graph_insert_vertex(Graph *g, Vertex v) {
     map_t bucket = hashmap_new();
-    hashmap_put(g->outgoing, (char *)v, (void **)&bucket);
+    hashmap_put(g->outgoing, (char *)v, (void *)bucket);
     if (g->directed == true) {
         map_t bucket_in = hashmap_new();
         hashmap_put(g->incoming, (char *)v, (void **)&bucket_in);
@@ -128,9 +125,11 @@ void Graph_insert_vertex(Graph *g, Vertex v) {
 // Insert and return a new Edge from u to v with auxiliary element x.
 void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any_t element) {
     Edge *e = Edge_init(origin, destination, element);
-    hashmap_put(g->outgoing, (char *)origin, (void **)&destination);
+    map_t tmp = hashmap_new();          // ï¿½ï¿½Ñ¯ï¿½ï¿½Öµ
+    hashmap_get(g->outgoing, (char *)origin, (void **)&tmp);
 
-    // undirected graph just need one step
+    hashmap_put(tmp, (char *)destination, e);
+    // undirected graph just need one step,
 
     // directed graph need one more reverse step
     if (!g->directed) {
@@ -138,5 +137,46 @@ void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any_t elemen
     }
 }
 
+// Return the edge from u to v, or NULL if not adjacent
+Edge *Graph_get_edge(Graph *g, Vertex origin, Vertex destination) {
+    map_t ans = hashmap_new();                                      // pointer to map
+    Edge *ans2 = Edge_init(NULL, NULL, NULL);       // pointer to edge
+    hashmap_get(g->outgoing, (char *)origin, (void **)&ans);
+    hashmap_get(ans, (char *)destination, (void **)&ans2);
 
-#endif // !__GRAPH_H_
+    ans2;
+    return ans2;
+}
+
+// Return the number of vertices in the graph.
+int Graph_vertex_count(Graph *g) {
+    return hashmap_length(g->outgoing);
+}
+
+//Return the dynamic array of all vertices of the graph
+
+
+// Return the number of edges in the graph.
+int Graph_edge_count(Graph *g) {
+    if (g->directed == false) {
+        int ans_count = 0;
+        Dynamic_Array *a = hashmap_used_index(g->outgoing);
+
+        int i = 0;
+        for (; i < a->n; i++) {
+            int index = (int)Dynamic_Array_get_Element(a, i + 1);
+
+            map_t temp = hashmap_select(g->outgoing, index);
+
+            ans_count += hashmap_length(temp);
+        }
+
+        ans_count /= 2;
+
+        return ans_count;
+    }
+
+    // directed graph needed one more implementation
+}
+
+#endif __GRAPH_H_

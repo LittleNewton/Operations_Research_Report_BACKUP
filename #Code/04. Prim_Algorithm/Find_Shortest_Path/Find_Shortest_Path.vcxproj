@@ -123,11 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="Dynamic_Array.cpp" />
     <ClCompile Include="HashMap.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dynamic_Array.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HashMap.h" />
   </ItemGroup>

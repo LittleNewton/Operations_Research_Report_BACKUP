@@ -18,11 +18,12 @@
 
 // Generic map implementation.
 
-#include "HashMap.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "HashMap.h"
+#include "Dynamic_Array.h"
 
 #define INITIAL_SIZE (256)
 #define MAX_CHAIN_LENGTH (8)
@@ -39,7 +40,9 @@ typedef struct _hashmap_element {
 typedef struct _hashmap_map {
     int table_size;             // Capacity
     int size;                   // used
-    hashmap_element *data;      // low level struct array
+    Dynamic_Array *index;        // take notes of used slots
+    hashmap_element *data;      // low level struct array，这是一个数组，通过key算出地址
+                                // 在这里首址加偏，求出目标节点地址，目标节点的data就是需要的value
 } hashmap_map;
 
 
@@ -53,6 +56,7 @@ map_t hashmap_new() {
 
     m->table_size = INITIAL_SIZE;
     m->size = 0;
+    m->index = Dynamic_Array_init();
 
     return m;
 err:
@@ -286,6 +290,7 @@ int hashmap_put(map_t in, char* key, any_t value) {
     }
 
     // Set the data
+    Dynamic_Array_append(m->index, (double)index);
     m->data[index].data = value;
     m->data[index].key = key;
     m->data[index].in_use = 1;
@@ -304,7 +309,7 @@ int hashmap_get(map_t in, char* key, any_t *arg) {
     m = (hashmap_map *)in;
 
     // Find data location
-    curr = hashmap_hash_int(m, key);
+    curr = hashmap_hash_int(m, key);    // format like "x10f1ead", just an address
 
     // Linear probing, if necessary
     for (i = 0; i < MAX_CHAIN_LENGTH; i++) {
@@ -312,7 +317,7 @@ int hashmap_get(map_t in, char* key, any_t *arg) {
         int in_use = m->data[curr].in_use;
         if (in_use == 1) {
             if (strcmp(m->data[curr].key, key) == 0) {
-                *arg = (m->data[curr].data);
+                *arg = (m->data[curr].data);        // save an address to arg
                 return MAP_OK;
             }
         }
@@ -403,4 +408,24 @@ int hashmap_length(map_t in) {
     else {
         return 0;
     }
+}
+
+// Get the currect used nodes' location
+Dynamic_Array *hashmap_used_index(map_t in) {
+    hashmap_map *m;
+
+    // Cast the hashmap
+    m = (hashmap_map *)in;
+
+    return m->index;
+}
+
+// Get the value located in n'th node
+any_t hashmap_select(map_t in, int n) {
+    hashmap_map *m;
+
+    // Cast the hashmap
+    m = (hashmap_map *)in;
+
+    return m->data[n].data;
 }

@@ -2,49 +2,61 @@
 * Copyright (c) 2018, Liu Peng, School of Mathematics and Statistics, YNU
 * Apache License.
 *
-* ÎÄ¼şÃû³Æ£ºSource.cpp
-* ÎÄ¼ş±êÊ¶£º¼ûÅäÖÃ¹ÜÀí¼Æ»®Êé
-* Õª Òª£º²âÊÔPrimËã·¨
+* æ–‡ä»¶åç§°ï¼šSource.cpp
+* æ–‡ä»¶æ ‡è¯†ï¼šè§é…ç½®ç®¡ç†è®¡åˆ’ä¹¦
+* æ‘˜ è¦ï¼šæµ‹è¯•Primç®—æ³•
 *
-* µ±Ç°°æ±¾£º1.0
-* ×÷ Õß£ºÁõÅô
-* ´´½¨ÈÕÆÚ£º2018Äê6ÔÂ20ÈÕ
-* Íê³ÉÈÕÆÚ£º2018Äê6ÔÂÈÕ
+* å½“å‰ç‰ˆæœ¬ï¼š1.0
+* ä½œ è€…ï¼šåˆ˜é¹
+* åˆ›å»ºæ—¥æœŸï¼š2018å¹´6æœˆ20æ—¥
+* å®Œæˆæ—¥æœŸï¼š2018å¹´6æœˆæ—¥
 *
-* È¡´ú°æ±¾£º0.9
-* Ô­×÷Õß £ºÁõÅô
-* Íê³ÉÈÕÆÚ£º
+* å–ä»£ç‰ˆæœ¬ï¼š0.9
+* åŸä½œè€… ï¼šåˆ˜é¹
+* å®Œæˆæ—¥æœŸï¼š
 */
 
 /*
 * A unit test and example of how to use the simple C hashmap
 */
 
+#pragma once
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 
 #include "HashMap.h"
-//#include "Graph.h"
+#include "Graph.h"
 
 #define KEY_MAX_LENGTH (256)
-#define KEY_PREFIX ("somekey")
-#define KEY_COUNT (1024*1024)
+#define KEY_COUNT (1024 * 1024)
 
-typedef struct data_struct_s
-{
-    char key_string[KEY_MAX_LENGTH];        // This is a string pointer.
+typedef struct data_struct_s {
+    char key_string[KEY_MAX_LENGTH]; // This is a string pointer.
     int number;
 } data_struct_t;
 
 int main(int argc, char *argv[]) {
-    char name[] = "Liu Peng";
-    int age = 22;
-    map_t m = hashmap_new();
-    hashmap_put(m, name, &age);
-    int *out = 0;
-    hashmap_get(m, name, (void **)&out);    // ÊäÈëµÄ±ØĞëÊÇÒ»¸öÖ¸ÏòÖ¸ÕëµÄÖ¸Õë¡£
-    printf("%d\n", *out);
+
+    Graph *g = Graph_init(false);
+
+    char a[] = "AAA";
+    char b[] = "BBB";
+    char c[] = "CCC";
+
+    Graph_insert_vertex(g, a);
+    Graph_insert_vertex(g, b);
+    Graph_insert_vertex(g, c);
+
+    Graph_insert_edge(g, a, b, NULL);
+    Graph_insert_edge(g, a, c, NULL);
+
+    Edge *ans = Graph_get_edge(g, a, b);
+
+    Vertex d = ans->origin;
+    printf("E(a, b)çš„originæ˜¯%s\n", (char *)d);
+
     system("pause");
     return 0;
 }

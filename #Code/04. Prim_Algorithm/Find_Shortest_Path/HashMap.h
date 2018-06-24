@@ -1,6 +1,3 @@
-#pragma once
-
-
 /*
 * Generic hashmap manipulation functions
 *
@@ -9,6 +6,11 @@
 * Modified by Pete Warden to fix a serious performance problem, support strings as keys
 * and removed thread synchronization - http://petewarden.typepad.com
 */
+
+#pragma once
+
+#include "Dynamic_Array.h"
+
 #ifndef __HASHMAP_H__
 #define __HASHMAP_H__
 
@@ -61,5 +63,11 @@ extern void hashmap_free(map_t in);
 
 // Get the current size of a hashmap
 extern int hashmap_length(map_t in);
+
+// Get the currect used nodes' location
+extern Dynamic_Array *hashmap_used_index(map_t in);
+
+// Get the value located in n'th node
+extern any_t hashmap_select(map_t in, int n);
 
 #endif __HASHMAP_H__
