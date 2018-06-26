@@ -1,11 +1,12 @@
 #pragma once
 
-#define INIT_SIZE       8
-
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "Dynamic_Array.h"
+
+#define INITIAL_CAPACITY (256)
 
 // Create a new empty dynamic array.
 Dynamic_Array *Dynamic_Array_init(void) {
@@ -15,25 +16,30 @@ Dynamic_Array *Dynamic_Array_init(void) {
         return NULL;
     }
 
-    double *tmp = (double *)calloc(8, sizeof(double));
+    any *tmp = (any *)calloc(INITIAL_CAPACITY, sizeof(any));
     ans->A = tmp;
-    ans->capacity = INIT_SIZE;
+    ans->capacity = INITIAL_CAPACITY;
     ans->n = 0;
+
     return ans;
 }
 
 // Get the element located in n.
 // Take care, n is the natural location, so it need to minus 
 // one during the locating process.
-double Dynamic_Array_get_Element(Dynamic_Array *d, int n) {
+any Dynamic_Array_get_Element(Dynamic_Array *d, int n) {
     return *(d->A + n - 1);
 }
 
 // Output this dynamic array as a normal array.
-void Dynamic_Array_print(Dynamic_Array *d) {
+void Dynamic_Array_print(Dynamic_Array *d, Function f, char c) {
+    char format[10] = "%";
+    char apart[2] = "\t";
+    strcat(format, &c);
+    strcat(format, apart);
     int i = 1;
     for (; i <= d->n; i++) {
-        printf("%8.2f\t", Dynamic_Array_get_Element(d, i));
+        printf(format, f(Dynamic_Array_get_Element(d, i)));
     }
     printf("\n");
 }

@@ -123,17 +123,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dynamic_Array.cpp" />
-    <ClCompile Include="HashMap.cpp" />
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Dynamic_Array.h" />
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="HashMap.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Dynamic_Array.cpp" />
+    <ClCompile Include="Src\Graph.cpp" />
+    <ClCompile Include="Src\HashMap.cpp" />
+    <ClCompile Include="Src\Prime.cpp" />
+    <ClCompile Include="Src\Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Dynamic_Array.h" />
+    <ClInclude Include="Src\Graph.h" />
+    <ClInclude Include="Src\HashMap.h" />
+    <ClInclude Include="src\Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

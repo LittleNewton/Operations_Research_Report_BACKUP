@@ -2,18 +2,18 @@
 * Copyright (c) 2018, Liu Peng, School of Mathematics and Statistics, YNU
 * Apache License.
 *
-* ÎÄ¼þÃû³Æ£ºHashMap.cpp
-* ÎÄ¼þ±êÊ¶£º¼ûÅäÖÃ¹ÜÀí¼Æ»®Êé
-* Õª Òª£º°üº¬ÁËhash·½·¨µÄËùÓÐº¯ÊýµÄ¾ßÌåÊµÏÖ¡£
+* æ–‡ä»¶åç§°ï¼šHashMap.cpp
+* æ–‡ä»¶æ ‡è¯†ï¼šè§é…ç½®ç®¡ç†è®¡åˆ’ä¹¦
+* æ‘˜ è¦ï¼šåŒ…å«äº†hashæ–¹æ³•çš„æ‰€æœ‰å‡½æ•°çš„å…·ä½“å®žçŽ°ã€‚
 *
-* µ±Ç°°æ±¾£º1.0
-* ×÷ Õß£ºÁõÅô
-* ´´½¨ÈÕÆÚ£º2018Äê6ÔÂ20ÈÕ
-* Íê³ÉÈÕÆÚ£º2018Äê6ÔÂÈÕ
+* å½“å‰ç‰ˆæœ¬ï¼š1.0
+* ä½œ è€…ï¼šåˆ˜é¹
+* åˆ›å»ºæ—¥æœŸï¼š2018å¹´6æœˆ20æ—¥
+* å®Œæˆæ—¥æœŸï¼š2018å¹´6æœˆæ—¥
 *
-* È¡´ú°æ±¾£º0.9
-* Ô­×÷Õß £ºÁõÅô
-* Íê³ÉÈÕÆÚ£º
+* å–ä»£ç‰ˆæœ¬ï¼š0.9
+* åŽŸä½œè€… ï¼šåˆ˜é¹
+* å®Œæˆæ—¥æœŸï¼š
 */
 
 // Generic map implementation.
@@ -25,14 +25,14 @@
 #include "HashMap.h"
 #include "Dynamic_Array.h"
 
-#define INITIAL_SIZE (256)
-#define MAX_CHAIN_LENGTH (8)
+#define INITIAL_SIZE        (256)
+#define MAX_CHAIN_LENGTH    (8)
 
 // We need to keep keys and values
 typedef struct _hashmap_element {
-    char *key;          // The key of the node
-    int in_use;         // 0, unused; 1, has been used
-    any_t data;         // void pointer, container for arbitary datatype
+    char *key;                  // The key of the node
+    int in_use;                 // 0, unused; 1, has been used
+    any_t data;                 // void pointer, container for arbitary datatype
 } hashmap_element;
 
 // A hashmap has some maximum size and current size,
@@ -40,15 +40,14 @@ typedef struct _hashmap_element {
 typedef struct _hashmap_map {
     int table_size;             // Capacity
     int size;                   // used
-    Dynamic_Array *index;        // take notes of used slots
-    hashmap_element *data;      // low level struct array£¬ÕâÊÇÒ»¸öÊý×é£¬Í¨¹ýkeyËã³öµØÖ·
-                                // ÔÚÕâÀïÊ×Ö·¼ÓÆ«£¬Çó³öÄ¿±ê½ÚµãµØÖ·£¬Ä¿±ê½ÚµãµÄdata¾ÍÊÇÐèÒªµÄvalue
+    Dynamic_Array *index;       // take notes of used slots
+    hashmap_element *data;      // low level struct array
 } hashmap_map;
 
 
 // Return an empty hashmap, or NULL on failure.
 map_t hashmap_new() {
-    hashmap_map* m = (hashmap_map *)malloc(sizeof(hashmap_map));
+    hashmap_map *m = (hashmap_map *)malloc(sizeof(hashmap_map));
     if (!m) goto err;
 
     m->data = (hashmap_element *)calloc(INITIAL_SIZE, sizeof(hashmap_element));

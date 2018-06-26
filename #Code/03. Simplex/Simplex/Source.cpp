@@ -48,18 +48,18 @@ int main(int argc, char *argv[]) {
     //Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
     //dual_Simplex(S, c2);
 
-    //char c1[] = "(0, 0, 0, -1, 0, -1)";
-    //char c2[] = "(-0.4, -0.5, 0, 0, 0, 0)";
-    //char  A[] = "(0.3,0.1,1,0,0,0;0.5,0.5,0,1,0,0;0.6,0.4,0,0,-1,1)";
-    //char  b[] = "(2.7, 6, 6)";
-    //Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
-    //dual_Simplex(S, c2);
-
-    char c1[] = "(3,1,0,0,0)";
-    char  A[] = "(2,1,-1,1,0; 1,1,0,0,1)";
-    char  b[] = "(2, 2)";
+    char c1[] = "(0, 0, 0, -1, 0, -1)";
+    char c2[] = "(-0.4, -0.5, 0, 0, 0, 0)";
+    char  A[] = "(0.3,0.1,1,0,0,0;0.5,0.5,0,1,0,0;0.6,0.4,0,0,-1,1)";
+    char  b[] = "(2.7, 6, 6)";
     Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
-    Simplex(S);
+    dual_Simplex(S, c2);
+
+    //char c1[] = "(3,1,0,0,0)";
+    //char  A[] = "(2,1,-1,1,0; 1,1,0,0,1)";
+    //char  b[] = "(2, 2)";
+    //Simplex_Tableau *S = Simplex_Tableau_init(c1, A, b);
+    //Simplex(S);
 
     system("pause");
     return 0;
