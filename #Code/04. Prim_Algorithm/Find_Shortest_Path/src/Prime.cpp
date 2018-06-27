@@ -23,27 +23,57 @@
 
 #include "Graph.h"
 
-// Minimal Spanning Tree of a connected graph.
-Graph *MST_Prim_Jarnik(Graph *g, Vertex start) {
-    Graph *ans = Graph_init(false);
-    Dynamic_Array *temp = Dynamic_Array_init();
-
-    // Find all the vertices connected with start.
-    map_t small_map;
-    hashmap_get(g->outgoing, (char *)start, (void **)&small_map);
-
-    // All the slots had been writen
-    Dynamic_Array *taken = hashmap_used_index(small_map);
-
-    double element;
-    int i;
-    int index;
-    Edge *e;
-    Vertex v;
-    for (i = 0; i < hashmap_length(small_map); i++) {
-        index = (int)Dynamic_Array_get_Element(taken, i + 1);
-        e = (Edge *)hashmap_select(small_map, index);
-        element = *(double *)e->element;
-        Dynamic_Array_append(temp, element);
+// Get the Minimal Spanning Tree of a connected graph.
+// If the graph is not connected, exception would be raisen.
+Graph *MST_Prim_Jarnik(Graph *g, Vertex start, Function f) {
+    map_t arg;      // make up the parameters hashmap_get fuc needing
+    if (MAP_MISSING == hashmap_get(g, (char *)start, &arg)) {
+        printf("fatal Error: bad input!\n");
+        return NULL;
     }
+
+    Graph *ans = Graph_init(false);             // the answer of this algorithm
+    Dynamic_Array *V = Dynamic_Array_init();    // set of vertices have been found
+
+    Dynamic_Array_append(V, (any)start);
+    Graph_insert_vertex(ans, start);
+
+    int i;
+    int j;
+    int Length_of_Graph_in = hashmap_length(g->outgoing);
+    Vertex temp;
+    map_t temp_map;
+    Dynamic_Array *temp_Edge = Dynamic_Array_init();                // set of edges connected with V
+
+    // Generally, loop will stop while len(V) = len(g).
+    // If g is not connected, error will be raisen.
+    while (V->n < Length_of_Graph_in) {
+        for (i = 1; i <= V->n; i++) {
+            temp = (Vertex)Dynamic_Array_get_Element(V, i);
+            temp_map = Graph_get_adjacent_Vertices(g, temp);        // submap
+            Dynamic_Array *index = hashmap_used_index(temp_map);    // used slots of the submap
+
+            Edge *tmp;
+            int change_memo = temp_Edge->n;                         // 
+            for (j = 1; j <= index->n; j++) {
+                int addr = (int)Dynamic_Array_get_Element(index, j);
+                tmp = (Edge *)hashmap_select(temp_map, addr);
+
+                // only if the destination of Edge(tmp) is not included in the map(G), the appending
+                // operation can be done.
+                if (hashmap_get(ans->outgoing, (char *)tmp->destination, (void **)&arg) == MAP_MISSING) {
+                    Dynamic_Array_append(temp_Edge, (any)tmp);
+                }
+            }
+        }
+
+        // find the minimal value
+        int min_location = Dynamic_Array_min(temp_Edge, f_get_double);
+        Edge *min = (Edge *)Dynamic_Array_get_Element(temp_Edge, min_location);
+        temp = min->destination;
+        Dynamic_Array_append(V, temp);
+        Graph_insert_vertex(ans, temp);
+        Graph_insert_edge(ans, min->origin, temp, min->element);
+    }
+    return ans;
 }

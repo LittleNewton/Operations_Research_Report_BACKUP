@@ -89,6 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <BrowseInformation>true</BrowseInformation>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -134,9 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Dynamic_Array.h" />
+    <ClInclude Include="src\func.h" />
     <ClInclude Include="Src\Graph.h" />
     <ClInclude Include="Src\HashMap.h" />
-    <ClInclude Include="src\Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

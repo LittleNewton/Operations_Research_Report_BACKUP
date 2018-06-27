@@ -23,22 +23,23 @@
 
 #include "HashMap.h"
 #include "Dynamic_Array.h"
-
+#include "func.h"
 
 #ifndef __GRAPH_H_
 #define __GRAPH_H__
 
+typedef double(*Function_graph)(any);
 
 // Lightweight vertex structure for a graph
 // All it contained is pointer.
-typedef any_t Vertex;
+typedef any Vertex;
 
 // Lightweight edge structure for a graph.
 // Do not call constructor directly. Use Graph's insert_edge(u, v, x)
 typedef struct _Edge {
     Vertex origin;          // trans pointer
     Vertex destination;     // trans pointer
-    any_t element;          // arbitary datatype
+    any element;          // arbitary datatype
 } Edge;
 
 // Representation of a simple graph using an adjacency map.
@@ -49,12 +50,17 @@ typedef struct _Graph {
 } Graph;
 
 // Initialize a Vertex, a pointer need to be input.
-extern Vertex Vertex_init(any_t vertex);
+extern Vertex Vertex_init(any vertex);
 
 // Return the element associated with this vertex
 
 // Initialize an Edge, 3 arguments are need
-extern Edge *Edge_init(Vertex origin, Vertex destination, any_t element);
+extern Edge *Edge_init(Vertex origin, Vertex destination, any element);
+
+// Get the double-type elements stored in the edge
+// Warning! This function can be called only when the element stored
+// in the edge is a double type.
+extern double Edge_get_element(any e);
 
 // Initialize a Graph
 extern Graph *Graph_init(bool directed);
@@ -72,10 +78,13 @@ extern bool Graph_is_directed(Graph *g);
 extern void Graph_insert_vertex(Graph *g, Vertex v);
 
 // Insert and return a new Edge from u to v with auxiliary element x.
-extern void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any_t element);
+extern void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any element);
 
-// Return the edge from u to v, or NULL if not adjacent
+// Return the edge from u to v, or NULL if not adjacent.
 extern Edge *Graph_get_edge(Graph *g, Vertex origin, Vertex destination);
+
+// Get a submap which contains all the vertices connected with v.
+extern map_t Graph_get_adjacent_Vertices(Graph *g, Vertex v);
 
 // Return the number of vertices in the graph.
 extern int Graph_vertex_count(Graph *g);
@@ -84,5 +93,11 @@ extern int Graph_vertex_count(Graph *g);
 
 // Return the number of edges in the graph.
 extern int Graph_edge_count(Graph *g);
+
+// Return the element stored in some Edge.
+double f_get_double(any e) {
+    Edge *temp = (Edge *)e;
+    return *(double *)(temp->element);
+}
 
 #endif __GRAPH_H_

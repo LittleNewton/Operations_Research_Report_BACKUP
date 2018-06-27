@@ -49,7 +49,7 @@
     <ClInclude Include="Src\HashMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Tree.h">
+    <ClInclude Include="src\func.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

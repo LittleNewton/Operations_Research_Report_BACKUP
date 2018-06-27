@@ -1,7 +1,7 @@
 #include "Graph.h"
 
 // Initialize a Vertex, a pointer need to be input.
-Vertex Vertex_init(any_t vertex) {
+Vertex Vertex_init(any vertex) {
     Vertex ans = vertex;
 
     return ans;
@@ -10,7 +10,7 @@ Vertex Vertex_init(any_t vertex) {
 // Return the element associated with this vertex
 
 // Initialize an Edge, 3 arguments are need
-Edge *Edge_init(Vertex origin, Vertex destination, any_t element) {
+Edge *Edge_init(Vertex origin, Vertex destination, any element) {
     Edge *ans = (Edge *)calloc(1, sizeof(Edge));
     if (!ans) {
         printf("fatal error: FUNCTION calloc can't get memory.\n");
@@ -22,6 +22,12 @@ Edge *Edge_init(Vertex origin, Vertex destination, any_t element) {
     ans->element = element;
 
     return ans;
+}
+
+// Get the double-type elements stored in the edge
+double Edge_get_element(any e) {
+    Edge *temp = (Edge *)e;
+    return *(double *)temp->element;
 }
 
 // Initialize a Graph
@@ -78,7 +84,7 @@ void Graph_insert_vertex(Graph *g, Vertex v) {
 // origin and destination should have been added into the graph.
 // Testification of existence has been done in function hashmap_get,
 // if cannot find the key, MAP_MISSING would be raisen.
-void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any_t element) {
+void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any element) {
     Edge *e = Edge_init(origin, destination, element);
 
     map_t tmp;
@@ -98,7 +104,7 @@ void Graph_insert_edge(Graph *g, Vertex origin, Vertex destination, any_t elemen
     }
 }
 
-// Return the edge from u to v, or NULL if not adjacent
+// Return the edge from u to v, or NULL if not adjacent.
 Edge *Graph_get_edge(Graph *g, Vertex origin, Vertex destination) {
     map_t ans;        // pointer to map
     Edge *ans2;       // pointer to edge
@@ -106,6 +112,17 @@ Edge *Graph_get_edge(Graph *g, Vertex origin, Vertex destination) {
     hashmap_get(ans, (char *)destination, (void **)&ans2);
 
     return ans2;
+}
+
+// Get a submap which contains all the vertices connected with v.
+map_t Graph_get_adjacent_Vertices(Graph *g, Vertex v) {
+    map_t ans = hashmap_new();
+
+    if (hashmap_get(g->outgoing, (char *)v, (void **)&ans) == MAP_MISSING) {
+        return NULL;
+    }
+
+    return ans;
 }
 
 // Return the number of vertices in the graph.

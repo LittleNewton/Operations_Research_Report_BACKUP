@@ -32,11 +32,14 @@ any Dynamic_Array_get_Element(Dynamic_Array *d, int n) {
 }
 
 // Output this dynamic array as a normal array.
-void Dynamic_Array_print(Dynamic_Array *d, Function f, char c) {
+void Dynamic_Array_print(Dynamic_Array *d, Function_dynamic_array f, char c) {
+
+    // confirm what kind of format should be used to output.
     char format[10] = "%";
     char apart[2] = "\t";
     strcat(format, &c);
     strcat(format, apart);
+
     int i = 1;
     for (; i <= d->n; i++) {
         printf(format, f(Dynamic_Array_get_Element(d, i)));
@@ -47,7 +50,7 @@ void Dynamic_Array_print(Dynamic_Array *d, Function f, char c) {
 // double the capacity of this data structure.
 void Dynamic_Array_resize(Dynamic_Array *D) {
     int i = 0;
-    double *tmp = (double *)calloc(2 * D->capacity, sizeof(double));
+    any *tmp = (any *)calloc(2 * D->capacity, sizeof(any));
     if (tmp == NULL) {
         printf("Cannot get memory, crash!\n");
         return;
@@ -60,7 +63,7 @@ void Dynamic_Array_resize(Dynamic_Array *D) {
 }
 
 // Add one more element to the given dynamic array
-void Dynamic_Array_append(Dynamic_Array *D, double e) {
+void Dynamic_Array_append(Dynamic_Array *D, any e) {
     if (D->n == D->capacity) {
         Dynamic_Array_resize(D);
     }
@@ -71,48 +74,24 @@ void Dynamic_Array_append(Dynamic_Array *D, double e) {
 // Generate a new dynamic array to contain the answer, the source dynamic array
 // won't be changed.
 // The index of dynamic array begins from 1 rather zero.
-Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a) {
-    Dynamic_Array *less = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
-    less->A = (double *)calloc(1, sizeof(double));
-    if (!less) {
-        printf("fatal error: FUNCTION calloc can't get memory.\n");
-        return NULL;
-    }
-    less->capacity = 1;
-    less->n = 0;
+Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a, Function_dynamic_array f) {
 
-    Dynamic_Array *more = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
-    more->A = (double *)calloc(1, sizeof(double));
-    if (!more) {
-        printf("fatal error: FUNCTION calloc can't get memory.\n");
-        return NULL;
-    }
-    more->capacity = 1;
-    more->n = 0;
-
-    Dynamic_Array *eq = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
-    eq->A = (double *)calloc(1, sizeof(double));
-    if (!eq) {
-        printf("fatal error: FUNCTION calloc can't get memory.\n");
-        return NULL;
-    }
-    eq->capacity = 1;
-    eq->n = 0;
+    Dynamic_Array *less = Dynamic_Array_init();
+    Dynamic_Array *more = Dynamic_Array_init();
+    Dynamic_Array *eq = Dynamic_Array_init();
 
     int i;
     if (a->n <= 1) {
         return a;
     }
     else {
-        // double pivot = 1 / 3. * (*(a->A) + ;
-
         for (i = 0; i < a->n; i++) {
-            double pivot = *(a->A);
-            if (*(a->A + i) > pivot) {
+            double pivot = f(*(a->A));
+            if (f(*(a->A + i)) > pivot) {
                 Dynamic_Array_append(more, *(a->A + i));
             }
             else {
-                if (*(a->A + i) < pivot) {
+                if (f(*(a->A + i)) < pivot) {
                     Dynamic_Array_append(less, *(a->A + i));
                 }
                 else {
@@ -121,8 +100,8 @@ Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a) {
             }
         }
     }
-    less = Dynamic_Array_quick_Sort(less);
-    more = Dynamic_Array_quick_Sort(more);
+    less = Dynamic_Array_quick_Sort(less, f);
+    more = Dynamic_Array_quick_Sort(more, f);
     for (i = 0; i < eq->n; i++) {
         Dynamic_Array_append(less, *(eq->A + i));
     }
@@ -132,12 +111,25 @@ Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a) {
     return less;
 }
 
-// This function is created for find the maximal value's index in objective function.
-int Dynamic_Array_find_Maximal(Dynamic_Array *d) {
-    double pivot = Dynamic_Array_get_Element(Dynamic_Array_quick_Sort(d), d->n);
+// Find the minimum value's index.
+int Dynamic_Array_min(Dynamic_Array *d, Function_dynamic_array f) {
+    Dynamic_Array *sorted = Dynamic_Array_quick_Sort(d, f);
+    double pivot = f(Dynamic_Array_get_Element(sorted, 1));
     int i = 0;
     for (; i < d->n; i++) {
-        if (*(d->A + i) == pivot) {
+        if (f(*(d->A + i)) == pivot) {
+            return i + 1;
+        }
+    }
+}
+
+// Find the maximal value's index.
+int Dynamic_Array_max(Dynamic_Array *d, Function_dynamic_array f) {
+    Dynamic_Array *sorted = Dynamic_Array_quick_Sort(d, f);
+    double pivot = f(Dynamic_Array_get_Element(sorted, sorted->n));
+    int i = 0;
+    for (; i < d->n; i++) {
+        if (f(*(d->A + i)) == pivot) {
             return i + 1;
         }
     }

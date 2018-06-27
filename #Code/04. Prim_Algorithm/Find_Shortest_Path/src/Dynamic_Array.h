@@ -21,18 +21,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "func.h"
+
 #define FIND_MISSING            -3          // No such element
 #define DYNAMIC_ARRAY_FULL      -2          // Hashmap is full
 #define DYNAMIC_ARRAY_OMEM      -1          // Out of Memory
 #define DYNAMIC_ARRAY_OK         0          // OK
 
-// any is a pointer.  This allows you to put arbitrary structures in
-// the hashmap.
-typedef void * any;
-
-// Function is a pointer to a function that can take one any_t arguments
+// Function_dynamic_array is a pointer to a function that can take one any arguments
 // and return an integer represents the value of some member.
-typedef int(*Function)(any);
+typedef double(*Function_dynamic_array)(any);
 
 // dynamic array ,can rise ans shorten itself automatically
 typedef struct Dynamic_Array {
@@ -50,29 +48,31 @@ extern Dynamic_Array *Dynamic_Array_init();
 extern any Dynamic_Array_get_Element(Dynamic_Array *d, int n);
 
 // Output this dynamic array as a normal array.
-// Function can get the value of some address,
+// Function_dynamic_array can get the value of some address,
 // and c represents the output auguments, for example
 // c is d represents "%d" and s represents "%s".
-extern void Dynamic_Array_print(Dynamic_Array *d, Function f, char c);
+extern void Dynamic_Array_print(Dynamic_Array *d, Function_dynamic_array f, char c);
 
 // double the capacity of this data structure.
 extern void Dynamic_Array_resize(Dynamic_Array *D);
 
 // Add one more element to the given dynamic array
-extern void Dynamic_Array_append(Dynamic_Array *D, double e);
+extern void Dynamic_Array_append(Dynamic_Array *D, any e);
 
 // Generate a new dynamic array to contain the answer, the source dynamic array
 // won't be changed.
 // The index of dynamic array begins from 1 rather zero.
-extern Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a, Function f);
+extern Dynamic_Array *Dynamic_Array_quick_Sort(Dynamic_Array *a, Function_dynamic_array f);
 
-// This function is created for find the maximal value's index in objective function.
-extern int Dynamic_Array_find_Maximal(Dynamic_Array *d);
+// Find the minimum value's index.
+extern int Dynamic_Array_min(Dynamic_Array *d, Function_dynamic_array f);
 
-// A possible function may be used during programming.
-// Only if the any datatype represents a double value.
-extern double get_Double(any in) {
-    return *(double *)in;
+// Find the maximal value's index.
+extern int Dynamic_Array_max(Dynamic_Array *d, Function_dynamic_array f);
+
+// Return the element stored in a node of a dynamic array.
+double get_double(any e) {
+    return *(double *)e;
 }
 
 #endif __DYNAMIC_ARRAY_H__

@@ -12,7 +12,7 @@
 typedef struct _hashmap_element {
     char *key;                  // The key of the node
     int in_use;                 // 0, unused; 1, has been used
-    any_t data;                 // void pointer, container for arbitary datatype
+    any data;                   // void pointer, container for arbitary datatype
 } hashmap_element;
 
 // A hashmap has some maximum size and current size,
@@ -32,9 +32,9 @@ API
 - unsigned int hashmap_hash_int(hashmap_map * m, char* keystring)
 - int hashmap_hash(map_t in, char* key)
 - int hashmap_rehash(map_t in)
-- int hashmap_put(map_t in, char* key, any_t value)
-- int hashmap_get(map_t in, char* key, any_t *arg)
-- int hashmap_iterate(map_t in, PFany f, any_t item)
+- int hashmap_put(map_t in, char* key, any value)
+- int hashmap_get(map_t in, char* key, any *arg)
+- int hashmap_iterate(map_t in, PFany f, any item)
 - int hashmap_remove(map_t in, char* key)
 - void hashmap_free(map_t in)
 - int hashmap_length(map_t in)

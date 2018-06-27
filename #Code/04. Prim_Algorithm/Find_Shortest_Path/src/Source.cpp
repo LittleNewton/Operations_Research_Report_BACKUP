@@ -28,14 +28,11 @@
 
 #include "HashMap.h"
 #include "Graph.h"
+#include "func.h"
+#include "Dynamic_Array.h"
 
 #define KEY_MAX_LENGTH (256)
 #define KEY_COUNT (1024 * 1024)
-
-typedef struct data_struct_s {
-    char key_string[KEY_MAX_LENGTH]; // This is a string pointer.
-    int number;
-} data_struct_t;
 
 int main(int argc, char *argv[]) {
 
@@ -82,7 +79,8 @@ int main(int argc, char *argv[]) {
     hashmap_get(g->outgoing, a, (void **)&kk);
 
     Dynamic_Array *taken = hashmap_used_index(kk);
-    Dynamic_Array_print(taken);
+    char format = 'f';
+    Dynamic_Array_print(taken, get_double, format);
     system("pause");
     return 0;
 }

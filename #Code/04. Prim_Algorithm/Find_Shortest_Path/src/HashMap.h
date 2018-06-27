@@ -20,18 +20,22 @@
 #define MAP_OK           0      // OK
 
 
-// any_t is a pointer.  This allows you to put arbitrary structures in
+// any is a pointer.  This allows you to put arbitrary structures in
 // the hashmap.
-typedef void * any_t;
+typedef void * any;
 
-// PFany is a pointer to a function that can take two any_t arguments
+// Function is a pointer to a function that can take one any arguments
+// and return an integer represents the value of some member.
+typedef int(* Function)(any);
+
+// PFany is a pointer to a function that can take two any arguments
 // and return an integer. Returns status code..
-typedef int (* PFany)(any_t, any_t);
+typedef int (* PFany)(any, any);
 
 // map_t is a pointer to an internally maintained data structure.
 // Clients of this package do not need to know how hashmaps are
 // represented.  They see and manipulate only map_t's.
-typedef any_t map_t;
+typedef any map_t;
 
 
 // Return an empty hashmap. Returns NULL if empty.
@@ -42,21 +46,20 @@ extern map_t hashmap_new();
 // return a map status code. If it returns anything other
 // than MAP_OK the traversal is terminated. f must
 // not reenter any hashmap functions, or deadlock may arise.
-extern int hashmap_iterate(map_t in, PFany f, any_t item);
-
+extern int hashmap_iterate(map_t in, PFany f, any item);
 
 // Add an element to the hashmap. Return MAP_OK or MAP_OMEM.
-extern int hashmap_put(map_t in, char* key, any_t value);
+extern int hashmap_put(map_t in, char* key, any value);
 
 // Get an element from the hashmap. Return MAP_OK or MAP_MISSING.
-extern int hashmap_get(map_t in, char* key, any_t *arg);
+extern int hashmap_get(map_t in, char* key, any *arg);
 
 // Remove an element from the hashmap. Return MAP_OK or MAP_MISSING.
-extern int hashmap_remove(map_t in, char* key);
+extern int hashmap_remove(map_t in, char* key, Function f);
 
 // Get any element. Return MAP_OK or MAP_MISSING.
 // remove - should the element be removed from the hashmap
-extern int hashmap_get_one(map_t in, any_t *arg, int remove);
+extern int hashmap_get_one(map_t in, any *arg, int remove);
 
 // Free the hashmap
 extern void hashmap_free(map_t in);
@@ -68,6 +71,6 @@ extern int hashmap_length(map_t in);
 extern Dynamic_Array *hashmap_used_index(map_t in);
 
 // Get the value located in n'th node
-extern any_t hashmap_select(map_t in, int n);
+extern any hashmap_select(map_t in, int n);
 
 #endif __HASHMAP_H__

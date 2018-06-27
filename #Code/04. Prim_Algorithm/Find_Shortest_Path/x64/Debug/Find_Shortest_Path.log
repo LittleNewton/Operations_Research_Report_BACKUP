@@ -2,4 +2,10 @@
 d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\04. prim_algorithm\find_shortest_path\src\source.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\04. prim_algorithm\find_shortest_path\src\dynamic_array.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\04. prim_algorithm\find_shortest_path\src\graph.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  Find_Shortest_Path.vcxproj -> D:\Nutstore\myStudyMaterial\Grade_3_Term_2\#Operations_Research\Operations_Research_Report\#Code\04. Prim_Algorithm\x64\Debug\Find_Shortest_Path.exe
+Graph.obj : error LNK2005: "double __cdecl get_double(void *)" (?get_double@@YANPEAX@Z) 已经在 Dynamic_Array.obj 中定义
+HashMap.obj : error LNK2005: "double __cdecl get_double(void *)" (?get_double@@YANPEAX@Z) 已经在 Dynamic_Array.obj 中定义
+Prime.obj : error LNK2005: "double __cdecl f_get_double(void *)" (?f_get_double@@YANPEAX@Z) 已经在 Graph.obj 中定义
+Prime.obj : error LNK2005: "double __cdecl get_double(void *)" (?get_double@@YANPEAX@Z) 已经在 Dynamic_Array.obj 中定义
+Source.obj : error LNK2005: "double __cdecl f_get_double(void *)" (?f_get_double@@YANPEAX@Z) 已经在 Graph.obj 中定义
+Source.obj : error LNK2005: "double __cdecl get_double(void *)" (?get_double@@YANPEAX@Z) 已经在 Dynamic_Array.obj 中定义
+D:\Nutstore\myStudyMaterial\Grade_3_Term_2\#Operations_Research\Operations_Research_Report\#Code\04. Prim_Algorithm\x64\Debug\Find_Shortest_Path.exe : fatal error LNK1169: 找到一个或多个多重定义的符号

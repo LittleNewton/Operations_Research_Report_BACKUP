@@ -32,7 +32,7 @@
 typedef struct _hashmap_element {
     char *key;                  // The key of the node
     int in_use;                 // 0, unused; 1, has been used
-    any_t data;                 // void pointer, container for arbitary datatype
+    any data;                 // void pointer, container for arbitary datatype
 } hashmap_element;
 
 // A hashmap has some maximum size and current size,
@@ -271,9 +271,9 @@ int hashmap_rehash(map_t in) {
 }
 
 // Add a pointer to the hashmap with some key
-int hashmap_put(map_t in, char* key, any_t value) {
+int hashmap_put(map_t in, char* key, any value) {
     int index;
-    hashmap_map* m;
+    hashmap_map *m;
 
     // Cast the hashmap
     m = (hashmap_map *)in;
@@ -289,7 +289,7 @@ int hashmap_put(map_t in, char* key, any_t value) {
     }
 
     // Set the data
-    Dynamic_Array_append(m->index, (double)index);
+    Dynamic_Array_append(m->index, (any)&index);
     m->data[index].data = value;
     m->data[index].key = key;
     m->data[index].in_use = 1;
@@ -299,7 +299,7 @@ int hashmap_put(map_t in, char* key, any_t value) {
 }
 
 // Get your pointer out of the hashmap with a key
-int hashmap_get(map_t in, char* key, any_t *arg) {
+int hashmap_get(map_t in, char* key, any *arg) {
     int curr;
     int i;
     hashmap_map* m;
@@ -331,9 +331,9 @@ int hashmap_get(map_t in, char* key, any_t *arg) {
 }
 
 // Iterate the function parameter over each element in the hashmap.  The
-// additional any_t argument is passed to the function as its first
+// additional any argument is passed to the function as its first
 // argument and the hashmap element is the second.
-int hashmap_iterate(map_t in, PFany f, any_t item) {
+int hashmap_iterate(map_t in, PFany f, any item) {
     int i;
 
     // Cast the hashmap
@@ -346,7 +346,7 @@ int hashmap_iterate(map_t in, PFany f, any_t item) {
     // Linear probing
     for (i = 0; i< m->table_size; i++)
         if (m->data[i].in_use != 0) {
-            any_t data = (any_t)(m->data[i].data);
+            any data = (any)(m->data[i].data);
             int status = f(item, data);
             if (status != MAP_OK) {
                 return status;
@@ -357,7 +357,7 @@ int hashmap_iterate(map_t in, PFany f, any_t item) {
 }
 
 // Remove an element with that key from the map
-int hashmap_remove(map_t in, char* key) {
+int hashmap_remove(map_t in, char *key, Function f) {
     int i;
     int curr;
     hashmap_map *m;
@@ -381,6 +381,15 @@ int hashmap_remove(map_t in, char* key) {
 
                 // Reduce the size
                 m->size--;
+                int j;
+                Dynamic_Array *d = Dynamic_Array_init();
+                for (j = 1; j <= m->index->n; j++) {
+                    any temp = Dynamic_Array_get_Element(m->index, j);
+                    if (curr != f(temp)) {
+                        Dynamic_Array_append(d, temp);
+                    }
+                }
+                m->index = d;
                 return MAP_OK;
             }
         }
@@ -420,7 +429,7 @@ Dynamic_Array *hashmap_used_index(map_t in) {
 }
 
 // Get the value located in n'th node
-any_t hashmap_select(map_t in, int n) {
+any hashmap_select(map_t in, int n) {
     hashmap_map *m;
 
     // Cast the hashmap
