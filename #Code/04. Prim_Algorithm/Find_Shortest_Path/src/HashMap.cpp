@@ -321,7 +321,7 @@ int hashmap_get(map_t in, char* key, any *arg) {
             }
         }
 
-        curr = (curr + 1) % m->table_size;  // cyclical travesal
+        curr = (curr + 1) % m->table_size;          // cyclical travesal
     }
 
     *arg = NULL;

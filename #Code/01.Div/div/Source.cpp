@@ -1,15 +1,23 @@
-// filename: Source.c
+/*
+* Copyright (c) 2018, Liu Peng, School of Mathematics and Statistics, YNU
+* Apache License.
+*
+* 文件名称：Source.cpp
+* 文件标识：见配置管理计划书
+* 摘 要：Prim算法
+*
+* 当前版本：1.0
+* 作 者：刘鹏
+* 创建日期：2018年3月14日
+* 完成日期：2018年6月25日
+*
+* 取代版本：
+* 原作者 ：刘鹏
+* 完成日期：
+*/
 
-/* -*- coding: utf-8 -*-
-
-Created on Wed Mar 14 19 : 10 : 28 2018
-
-@author: LiuPeng
-
-@version: 1.0
-
-last edit: 208-03-24 17:36
-
+/*
+* A function like division which can execuate with some conditions.
 */
 
 #include<stdio.h>
@@ -21,28 +29,27 @@ last edit: 208-03-24 17:36
 typedef struct char_LinkedList {
     char_LinkedList *head;
     char elements;          // partition must be integer less than 10
-    int times;              // 这是一个容器，放置一个数组，用指针作为头
+    int times;              // container
     char_LinkedList *next;
 }char_LinkedList;
 
 typedef struct Dynamic_Array {
-    double *A;              // 底层数组
-    int capacity;           // 底层数组的容量
-    int n;                  // 底层数组的占用量
+    double *A;              // low-level array
+    int capacity;           // the capacity
+    int n;                  // used room
 }Dynamic_Array;
 
 typedef struct Div {
     double up;
     double down;
     double value;
-    char state[10];         // NaN or Negative，长度不定
-                            // 这个state必须是malloc而来的，坚决不能直接用
+    char state[10];         // NaN or Negative or Normal
 }Div;
 
 typedef struct Div_Dynamic_Array {
-    Div *A;             // 底层结构体数组的头指针，不能动！
-    int capacity;       // 底层结构体数组的容量
-    int n;              // 底层数组的占用量
+    Div *A;                 // 底层结构体数组的头指针，不能动！
+    int capacity;           // 底层结构体数组的容量
+    int n;                  // 底层数组的占用量
 }Div_Dynamic_Array;
 
 void Div_Resize(Div_Dynamic_Array *D) {
@@ -56,11 +63,11 @@ void Div_Resize(Div_Dynamic_Array *D) {
         (tmp + i)->up = (D->A + i)->up;
         (tmp + i)->down = (D->A + i)->down;
         (tmp + i)->value = (D->A + i)->value;
-        strcpy((tmp + i)->state, (D->A + i)->state);            //不能简单复制，否则会内存出错
+        strcpy((tmp + i)->state, (D->A + i)->state);
     }
     free(D->A);
     D->A = tmp;
-    tmp = NULL;         // 避免野指针
+    tmp = NULL;
 
     D->capacity *= 2;
 }
@@ -142,7 +149,8 @@ void Div_onArray(Dynamic_Array *a, Dynamic_Array *b, Div_Dynamic_Array *ans) {
     }
 }
 
-void print(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
+// output a Double array
+void print(int n, Dynamic_Array *d) {
     printf(/* "argument %d is \n*/"(");
     int i;
     for (i = 0; i < d->n - 1; i++) {
@@ -152,7 +160,8 @@ void print(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
     printf(")\n\n");
 }
 
-void print_int(int n, Dynamic_Array *d) {   // 输出一个动态的双精度数组
+// Output a double-array with integer format
+void print_int(int n, Dynamic_Array *d) {
     printf(/* "argument %d is \n*/"(");
     int i;
     for (i = 0; i < d->n - 1; i++) {
@@ -218,8 +227,6 @@ Dynamic_Array *Quick_sort(Dynamic_Array *a) {
         return a;
     }
     else {
-        /*double pivot = 1 / 3. * (*(a->A) + ;*/
-
         for (i = 0; i < a->n; i++) {
             double pivot = *(a->A);
             if (*(a->A + i) > pivot) {
@@ -260,12 +267,13 @@ void find(Div_Dynamic_Array *a) {
 
     int i = 0;
     for (i = 0; i < a->n; i++) {
-        if (!strcmp((a->A + i)->state, "Normal")) {     // 分母合法的就append
+
+        // denominator is legal
+        if (!strcmp((a->A + i)->state, "Normal")) {
             Append(c, (a->A + i)->value);
         }
     }
-    d = Quick_sort(c);      // 排序一下
-                            //print(d->n, d);
+    d = Quick_sort(c);
 
     double pivot = *(d->A + 0);
     Dynamic_Array *tmp = (Dynamic_Array *)calloc(1, sizeof(Dynamic_Array));
@@ -289,7 +297,8 @@ void find(Div_Dynamic_Array *a) {
     print_int(tmp->n, tmp);
 }
 
-char *clean(char *string) {     // 已经后期优化，减去了字符串中所有的空格
+// Get rid of the useless blank characters.
+char *clean(char *string) {
     char *head = string;
     int count_space = 0;
     while (*string == ' ' && *string != '\0') {
@@ -298,7 +307,7 @@ char *clean(char *string) {     // 已经后期优化，减去了字符串中所
     }
     string = head;
 
-    int len = 1;    // 有'\0'，所以要＋1
+    int len = 1;
     while (*string != '\0') {
         len += 1;
         string++;
@@ -345,7 +354,6 @@ char *cut(char *string) {
 
 // Put an new element into the stack
 double get_Number(char *string) {
-    // 传递一个完整的clean过的字符串进来，按需切割头部，剩下的头作为新的头。
     if (*string == '\0') {
         return NULL;
     }
@@ -366,26 +374,26 @@ double get_Number(char *string) {
         while (*string != ',') {
             work->elements = *string;
             work->times = i;
-            work->next = (char_LinkedList *)malloc(sizeof(char_LinkedList));    // 申请
+            work->next = (char_LinkedList *)malloc(sizeof(char_LinkedList));    // malloc
             if (work->next == NULL) {
                 printf("Can't get memory!\n");
                 return 0.;
             }
-            work = work->next;                                                  // 移动
+            work = work->next;                                                  // move
             work->elements = NULL;
             work->times = NULL;
             string++;
-            i++;    // i在后面还有用
+            i++;
         }
 
-        work->elements = *string;       // 逗号也要加上
-        work->times = NULL;             // 逗号的指数不能为有意义的
+        work->elements = *string;
+        work->times = NULL;
 
         string++;
 
         work = head;
         int dot = 1;
-        int comma = 1;      // 逗号的用处
+        int comma = 1;
         int dot_index = NULL;
         while (work->elements != ',') {
             if (work->elements == '.') {
@@ -475,7 +483,7 @@ int main(int argc, char *argv[]) {
         Append(&c_2, get_Number(string_2));
         string_2 = cut(string_2);
     }
-    c_1.n -= 1;     // 这也是无奈之举啊，谁让0.0 ==NULL呢
+    c_1.n -= 1;
     c_2.n -= 1;
 
     Div_Dynamic_Array ans;

@@ -9,7 +9,7 @@
 * 当前版本：1.0
 * 作 者：刘鹏
 * 创建日期：2018年6月25日
-* 完成日期：2018年6月日
+* 完成日期：2018年6月26日
 *
 * 取代版本：
 * 原作者 ：刘鹏
@@ -24,7 +24,7 @@
 #include "Graph.h"
 
 // Get the Minimal Spanning Tree of a connected graph.
-// If the graph is not connected, exception would be raisen.
+// If the graph is not connected, exception would be raised.
 Graph *MST_Prim_Jarnik(Graph *g, Vertex start, Function f) {
     map_t arg;      // make up the parameters hashmap_get fuc needing
     if (MAP_MISSING == hashmap_get(g, (char *)start, &arg)) {
@@ -43,10 +43,10 @@ Graph *MST_Prim_Jarnik(Graph *g, Vertex start, Function f) {
     int Length_of_Graph_in = hashmap_length(g->outgoing);
     Vertex temp;
     map_t temp_map;
-    Dynamic_Array *temp_Edge = Dynamic_Array_init();                // set of edges connected with V
+    Dynamic_Array *temp_Edge = Dynamic_Array_init();        // set of edges connected with V
 
     // Generally, loop will stop while len(V) = len(g).
-    // If g is not connected, error will be raisen.
+    // If g is not connected, error will be raised.
     while (V->n < Length_of_Graph_in) {
         for (i = 1; i <= V->n; i++) {
             temp = (Vertex)Dynamic_Array_get_Element(V, i);
@@ -54,14 +54,16 @@ Graph *MST_Prim_Jarnik(Graph *g, Vertex start, Function f) {
             Dynamic_Array *index = hashmap_used_index(temp_map);    // used slots of the submap
 
             Edge *tmp;
-            int change_memo = temp_Edge->n;                         // 
+            int change_memo = temp_Edge->n;
             for (j = 1; j <= index->n; j++) {
                 int addr = (int)Dynamic_Array_get_Element(index, j);
                 tmp = (Edge *)hashmap_select(temp_map, addr);
 
-                // only if the destination of Edge(tmp) is not included in the map(G), the appending
+                // only if the destination of Edge(tmp) is not 
+                // included in the map(G), the appending
                 // operation can be done.
-                if (hashmap_get(ans->outgoing, (char *)tmp->destination, (void **)&arg) == MAP_MISSING) {
+                if (hashmap_get(ans->outgoing, (char *)tmp->destination, (void **)&arg) 
+                    == MAP_MISSING) {
                     Dynamic_Array_append(temp_Edge, (any)tmp);
                 }
             }
