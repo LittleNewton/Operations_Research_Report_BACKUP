@@ -127,10 +127,10 @@
   <ItemGroup>
     <ClInclude Include="ASCII_Table.h" />
     <ClInclude Include="Divide.h" />
+    <ClInclude Include="Dynamic_Array.h" />
     <ClInclude Include="Matrix_Operation.h" />
     <ClInclude Include="Shell_Reader.h" />
     <ClInclude Include="Simplex.h" />
-    <ClInclude Include="Dynamic_Array.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

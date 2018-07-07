@@ -27,7 +27,7 @@ typedef struct Simplex_Tableau {
     Matrix *Matrix;
     Dynamic_Array *Objective_Vector;
     Dynamic_Array *b;
-} Simplex_Talbeau;
+} Simplex_Tableau;
 
 // Initialize the table of simplex method.
 // This is a simple implementation, only can solve problems like "Ax = b"
@@ -126,7 +126,7 @@ void Simplex(Simplex_Tableau *S) {
 
     Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
 
-    printf("Iter deepth: %d\n", iter_deepth++);
+    printf("Iter depth: %d\n", iter_deepth++);
     Matrix_print(S->Matrix);
 
     object = Matrix_row_to_Vector(S->Matrix, 1, -1);
@@ -142,7 +142,7 @@ void Simplex(Simplex_Tableau *S) {
         N_pivot_row = Div_Dynamic_Array_find_Minimal(tmp);
 
         Matrix_pivot_Element_Trans(S->Matrix, N_pivot_row, N_pivot_column);
-        printf("Iter deepth: %d\n", iter_deepth);
+        printf("Iter depth: %d\n", iter_deepth);
         Matrix_print(S->Matrix);
         object = Matrix_row_to_Vector(S->Matrix, 1, -1);
         N_pivot_column = Dynamic_Array_find_Maximal(object);
@@ -168,8 +168,8 @@ void dual_Simplex(Simplex_Tableau *S, char *c2) {
 
     printf("First Phase completed.\n\n");
     Simplex_Tableau_re_init(S, c2);
-	printf("NEW Objective Function is ");
+    printf("NEW Objective Function is ");
     Dynamic_Array_print(S->Objective_Vector);
-	printf("\n");
+    printf("\n");
     Simplex(S);
 }

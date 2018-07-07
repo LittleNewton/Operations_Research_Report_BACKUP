@@ -20,7 +20,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ASCII_Table.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="Divide.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dynamic_Array.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Matrix_Operation.h">
@@ -30,12 +36,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Simplex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Dynamic_Array.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ASCII_Table.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
