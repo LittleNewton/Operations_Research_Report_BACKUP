@@ -1,0 +1,5 @@
+﻿  Source.cpp
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\04. prim_algorithm\github_prim\github_prim\source.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\04. prim_algorithm\github_prim\github_prim\source.cpp(306): warning C4474: printf: 格式字符串中传递的参数太多
+  d:\nutstore\mystudymaterial\grade_3_term_2\#operations_research\operations_research_report\#code\04. prim_algorithm\github_prim\github_prim\source.cpp(306): note: 占位符和其参数预计 1 可变参数，但提供的却是 2 参数
+  Github_Prim.vcxproj -> D:\Nutstore\myStudyMaterial\Grade_3_Term_2\#Operations_Research\Operations_Research_Report\#Code\04. Prim_Algorithm\Github_Prim\Debug\Github_Prim.exe
