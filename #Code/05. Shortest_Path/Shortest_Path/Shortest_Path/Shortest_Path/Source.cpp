@@ -2,18 +2,18 @@
 * Copyright (c) 2018, Liu Peng, School of Mathematics and Statistics, YNU
 * Apache License.
 *
-* ÎÄ¼þÃû³Æ£ºShortest_Path.cpp
-* ÎÄ¼þ±êÊ¶£º¼ûÅäÖÃ¹ÜÀí¼Æ»®Êé
-* Õª Òª£ºÑ°ÕÒ¸ø¶¨¶¥µã¼äµÄ×î¶ÌÂ·
+* æ–‡ä»¶åç§°ï¼šShortest_Path.cpp
+* æ–‡ä»¶æ ‡è¯†ï¼šè§é…ç½®ç®¡ç†è®¡åˆ’ä¹¦
+* æ‘˜ è¦ï¼šå¯»æ‰¾ç»™å®šé¡¶ç‚¹é—´çš„æœ€çŸ­è·¯
 *
-* µ±Ç°°æ±¾£º1.0
-* ×÷ Õß£ºÁõÅô
-* ´´½¨ÈÕÆÚ£º2018Äê7ÔÂ7ÈÕ
-* Íê³ÉÈÕÆÚ£º2018Äê7ÔÂ7ÈÕ
+* å½“å‰ç‰ˆæœ¬ï¼š1.0
+* ä½œ è€…ï¼šåˆ˜é¹
+* åˆ›å»ºæ—¥æœŸï¼š2018å¹´7æœˆ7æ—¥
+* å®Œæˆæ—¥æœŸï¼š2018å¹´7æœˆ7æ—¥
 *
-* È¡´ú°æ±¾£º
-* Ô­×÷Õß £ºÁõÅô
-* Íê³ÉÈÕÆÚ£º
+* å–ä»£ç‰ˆæœ¬ï¼š
+* åŽŸä½œè€… ï¼šåˆ˜é¹
+* å®Œæˆæ—¥æœŸï¼š
 */
 
 /*
